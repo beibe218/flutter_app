@@ -6,7 +6,6 @@ final double pageWidth = 400.0;
 BuildContext buildContext;
 
 class AppStoreDemo extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     buildContext = context;
@@ -22,12 +21,11 @@ class AppStoreDemo extends StatelessWidget {
           _buildDivider(),
           _buildRecommendAppView(),
           _buildDivider(),
-          _buildFreshAppView()
+          _buildFreshAppView(),
         ],
       ),
     );
   }
-
 }
 
 Widget _buildHotView() {
@@ -37,26 +35,11 @@ Widget _buildHotView() {
       scrollDirection: Axis.horizontal,
       children: <Widget>[
         _buildHotItem(
-            '正在热播',
-            Colors.red,
-            '腾讯视频',
-            '知否知否正在热播',
-            'picture_zhifouzhifou.png'
-        ),
+            '正在热播', Colors.red, '腾讯视频', '知否知否正在热播', 'picture_zhifouzhifou.png'),
         _buildHotItem(
-            '全网独播',
-            Colors.yellow,
-            '优酷视频',
-            '《鬼吹灯之怒晴湘西》全网独播',
-            'picture_1.png'
-        ),
+            '全网独播', Colors.yellow, '优酷视频', '《鬼吹灯之怒晴湘西》全网独播', 'picture_1.png'),
         _buildHotItem(
-            '限时特惠',
-            Colors.green,
-            '专业录音笔记本',
-            '订阅六折优惠',
-            'picture_2.png'
-        ),
+            '限时特惠', Colors.green, '专业录音笔记本', '订阅六折优惠', 'picture_2.png'),
       ],
     ),
   );
@@ -129,30 +112,12 @@ Widget _buildHotAppView() {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
-              _buildHotAppItems(
-                  'MOMO陌陌',
-                  '很高兴认识你',
-                  '腾讯视频',
-                  '知否知否正在热播',
-                  'ic_momo.png',
-                  'ic_tencent_video.png'
-              ),
-              _buildHotAppItems(
-                  '微信',
-                  '社交',
-                  '优酷视频-大帅哥全网独播',
-                  '国名少年侦探社、大江大河尽在优酷',
-                  'ic_wechat.png',
-                  'ic_youku.png'
-              ),
-              _buildHotAppItems(
-                  'QQ',
-                  '社交',
-                  '淘宝-移动购物，生活社区',
-                  '随时随地，想淘就淘',
-                  'ic_qq.png',
-                  'ic_taobao.png'
-              ),
+              _buildHotAppItems('MOMO陌陌', '很高兴认识你', '腾讯视频', '知否知否正在热播',
+                  'ic_momo.png', 'ic_tencent_video.png'),
+              _buildHotAppItems('微信', '社交', '优酷视频-大帅哥全网独播', '国名少年侦探社、大江大河尽在优酷',
+                  'ic_wechat.png', 'ic_youku.png'),
+              _buildHotAppItems('QQ', '社交', '淘宝-移动购物，生活社区', '随时随地，想淘就淘',
+                  'ic_qq.png', 'ic_taobao.png'),
             ],
           ),
         )
@@ -161,26 +126,29 @@ Widget _buildHotAppView() {
   );
 }
 
-Widget _buildHotAppItems(String title, String desc,
-    String title2,
-    String desc2,
-    String iconName1,
-    String iconName2) {
-  return Container(
-    width: pageWidth,
-    height: 201.0,
-    margin: EdgeInsets.only(left: 8.0, right: 8.0),
-    child: Column(
-      children: <Widget>[
-        _buildHotAppItem(title, desc, iconName1),
-        new Container(
-          margin: EdgeInsets.only(left: 88.0),
-          child: new Divider(
-            height: 1.0,
+Widget _buildHotAppItems(String title, String desc, String title2, String desc2,
+    String iconName1, String iconName2) {
+  return new GestureDetector(
+    behavior: HitTestBehavior.opaque,
+    onTap: () {
+      _toAppDetail();
+    },
+    child: new Container(
+      width: pageWidth,
+      height: 201.0,
+      margin: EdgeInsets.only(left: 8.0, right: 8.0),
+      child: Column(
+        children: <Widget>[
+          _buildHotAppItem(title, desc, iconName1),
+          new Container(
+            margin: EdgeInsets.only(left: 88.0),
+            child: new Divider(
+              height: 1.0,
+            ),
           ),
-        ),
-        _buildHotAppItem(title2, desc2, iconName2),
-      ],
+          _buildHotAppItem(title2, desc2, iconName2),
+        ],
+      ),
     ),
   );
 }
@@ -204,10 +172,7 @@ Widget _buildHotAppItem(String title, String desc, String iconName) {
                 Radius.circular(16.0),
               ),
               border: Border.all(
-                  color: CupertinoColors.lightBackgroundGray,
-                  width: 1.0
-              )
-          ),
+                  color: CupertinoColors.lightBackgroundGray, width: 1.0)),
         ),
         Container(
           margin: EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
@@ -218,20 +183,14 @@ Widget _buildHotAppItem(String title, String desc, String iconName) {
                 margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
                 child: Text(
                   title,
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black
-                  ),
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
                 ),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
                 child: Text(
                   desc,
-                  style: TextStyle(
-                      fontSize: 13.0,
-                      color: Colors.grey
-                  ),
+                  style: TextStyle(fontSize: 13.0, color: Colors.grey),
                 ),
               ),
               Expanded(
@@ -243,8 +202,8 @@ Widget _buildHotAppItem(String title, String desc, String iconName) {
                         CupertinoButton(
                             color: CupertinoColors.lightBackgroundGray,
                             minSize: 30.0,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 24.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 24.0),
                             borderRadius: new BorderRadius.circular(32.0),
                             child: const Text(
                               '获取',
@@ -252,19 +211,15 @@ Widget _buildHotAppItem(String title, String desc, String iconName) {
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w700,
                                   letterSpacing: -0.28,
-                                  color: Colors.blueAccent
-                              ),
+                                  color: Colors.blueAccent),
                             ),
-                            onPressed: () {}
-                        ),
+                            onPressed: () {}),
                         Container(
                           margin: EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
                           child: Text(
                             'App内购买项目',
-                            style: TextStyle(
-                                fontSize: 10.0,
-                                color: Colors.grey
-                            ),
+                            style:
+                                TextStyle(fontSize: 10.0, color: Colors.grey),
                           ),
                         )
                       ],
@@ -295,8 +250,7 @@ Widget _buildTitleView(String title) {
                     style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w500,
-                        color: CupertinoColors.black
-                    ),
+                        color: CupertinoColors.black),
                   ),
                 ),
               ),
@@ -306,17 +260,14 @@ Widget _buildTitleView(String title) {
                     '查看全部',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                        fontSize: 16.0,
-                        color: CupertinoColors.activeBlue
-                    ),
+                        fontSize: 16.0, color: CupertinoColors.activeBlue),
                   ),
                 ),
               )
             ],
           ),
         ],
-      )
-  );
+      ));
 }
 
 Widget _buildRecommendAppView() {
@@ -330,20 +281,10 @@ Widget _buildRecommendAppView() {
           child: new ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
+              _buildRecommendAppItem('填充色块 揭开图片背后的秘密', 'picture_2.png',
+                  'ic_momo.png', 'MOMO陌陌', '很高兴认识你'),
               _buildRecommendAppItem(
-                  '填充色块 揭开图片背后的秘密',
-                  'picture_2.png',
-                  'ic_momo.png',
-                  'MOMO陌陌',
-                  '很高兴认识你'
-              ),
-              _buildRecommendAppItem(
-                  '指尖的色彩',
-                  'lake.jpg',
-                  'ic_douyin.png',
-                  '抖音',
-                  '记录美好生活'
-              ),
+                  '指尖的色彩', 'lake.jpg', 'ic_douyin.png', '抖音', '记录美好生活'),
             ],
           ),
         )
@@ -362,20 +303,11 @@ Widget _buildRecommendAppItem(String desc, String pictureName,
         Container(
           child: new Text(
             desc,
-            style: new TextStyle(
-                fontSize: 14.0,
-                color: Colors.grey
-            ),
+            style: new TextStyle(fontSize: 14.0, color: Colors.grey),
           ),
         ),
-        Expanded(
-            child: _buildImageItem(pictureName)
-        ),
-        _buildAppItemRow(
-            appIconName,
-            appName,
-            appDesc
-        )
+        Expanded(child: _buildImageItem(pictureName)),
+        _buildAppItemRow(appIconName, appName, appDesc)
       ],
     ),
   );
@@ -383,12 +315,13 @@ Widget _buildRecommendAppItem(String desc, String pictureName,
 
 Widget _buildAppItemRow(String appIconName, String appName, String appDesc) {
   return new GestureDetector(
+    behavior: HitTestBehavior.opaque,
     onTap: () {
       _toAppDetail();
     },
-    child: Container(
+    child: new Container(
       width: pageWidth,
-      child: Row(
+      child: new Row(
         children: <Widget>[
           new Container(
             width: 70.0,
@@ -396,16 +329,10 @@ Widget _buildAppItemRow(String appIconName, String appName, String appDesc) {
             decoration: new BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('images/' + appIconName),
-                    fit: BoxFit.cover
-                ),
-                borderRadius: BorderRadius.all(
-                    Radius.circular(16.0)
-                ),
+                    fit: BoxFit.cover),
+                borderRadius: BorderRadius.all(Radius.circular(16.0)),
                 border: Border.all(
-                    color: CupertinoColors.lightBackgroundGray,
-                    width: 1.0
-                )
-            ),
+                    color: CupertinoColors.lightBackgroundGray, width: 1.0)),
           ),
           Expanded(
             child: new Container(
@@ -424,10 +351,7 @@ Widget _buildAppItemRow(String appIconName, String appName, String appDesc) {
                     margin: EdgeInsets.only(top: 5.0),
                     child: new Text(
                       appDesc,
-                      style: TextStyle(
-                          fontSize: 13.0,
-                          color: Colors.grey
-                      ),
+                      style: TextStyle(fontSize: 13.0, color: Colors.grey),
                     ),
                   )
                 ],
@@ -501,8 +425,7 @@ Widget _buildFreshAppView() {
                 _buildFreshAppItem(),
                 _buildFreshAppItem(),
               ],
-            )
-        )
+            ))
       ],
     ),
   );
@@ -537,8 +460,5 @@ Widget _buildAppItemDivider() {
 
 void _toAppDetail() {
   Navigator.push(buildContext,
-      MaterialPageRoute(
-          builder: (context) => new AppDetailDemo()
-      )
-  );
+      MaterialPageRoute(builder: (context) => new AppDetailDemo()));
 }
