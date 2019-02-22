@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/demo/app_detail_demo.dart';
+import 'package:flutter_app/demo/app_model.dart';
 
 final double pageWidth = 400.0;
 BuildContext buildContext;
@@ -128,109 +129,109 @@ Widget _buildHotAppView() {
 
 Widget _buildHotAppItems(String title, String desc, String title2, String desc2,
     String iconName1, String iconName2) {
-  return new GestureDetector(
-    behavior: HitTestBehavior.opaque,
-    onTap: () {
-      _toAppDetail();
-    },
-    child: new Container(
-      width: pageWidth,
-      height: 201.0,
-      margin: EdgeInsets.only(left: 8.0, right: 8.0),
-      child: Column(
-        children: <Widget>[
-          _buildHotAppItem(title, desc, iconName1),
-          new Container(
-            margin: EdgeInsets.only(left: 88.0),
-            child: new Divider(
-              height: 1.0,
-            ),
+  return new Container(
+    width: pageWidth,
+    height: 201.0,
+    margin: EdgeInsets.only(left: 8.0, right: 8.0),
+    child: Column(
+      children: <Widget>[
+        _buildHotAppItem(title, desc, iconName1),
+        new Container(
+          margin: EdgeInsets.only(left: 88.0),
+          child: new Divider(
+            height: 1.0,
           ),
-          _buildHotAppItem(title2, desc2, iconName2),
-        ],
-      ),
+        ),
+        _buildHotAppItem(title2, desc2, iconName2),
+      ],
     ),
   );
 }
 
 Widget _buildHotAppItem(String title, String desc, String iconName) {
-  return Container(
-    margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-    height: 80.0,
-    width: pageWidth,
-    child: Row(
-      children: <Widget>[
-        Container(
-          width: 80.0,
-          height: 80.0,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('images/' + iconName),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(16.0),
-              ),
-              border: Border.all(
-                  color: CupertinoColors.lightBackgroundGray, width: 1.0)),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                child: Text(
-                  title,
-                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+  return new GestureDetector(
+    behavior: HitTestBehavior.opaque,
+    onTap: () {
+      _toAppDetail(new AppModel(iconName, title, desc));
+    },
+    child: Container(
+      margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+      height: 80.0,
+      width: pageWidth,
+      child: Row(
+        children: <Widget>[
+          Container(
+            width: 80.0,
+            height: 80.0,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/' + iconName),
+                  fit: BoxFit.cover,
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                child: Text(
-                  desc,
-                  style: TextStyle(fontSize: 13.0, color: Colors.grey),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(16.0),
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        CupertinoButton(
-                            color: CupertinoColors.lightBackgroundGray,
-                            minSize: 30.0,
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 24.0),
-                            borderRadius: new BorderRadius.circular(32.0),
-                            child: const Text(
-                              '获取',
-                              style: const TextStyle(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: -0.28,
-                                  color: Colors.blueAccent),
-                            ),
-                            onPressed: () {}),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            'App内购买项目',
-                            style:
-                                TextStyle(fontSize: 10.0, color: Colors.grey),
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              )
-            ],
+                border: Border.all(
+                    color: CupertinoColors.lightBackgroundGray, width: 1.0)),
           ),
-        )
-      ],
+          Container(
+            margin: EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
+                  child: Text(
+                    title,
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
+                  child: Text(
+                    desc,
+                    style: TextStyle(fontSize: 13.0, color: Colors.grey),
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          CupertinoButton(
+                              color: CupertinoColors.lightBackgroundGray,
+                              minSize: 30.0,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 24.0),
+                              borderRadius: new BorderRadius.circular(32.0),
+                              child: const Text(
+                                '获取',
+                                style: const TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: -0.28,
+                                    color: Colors.blueAccent),
+                              ),
+                              onPressed: () {}),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              'App内购买项目',
+                              style:
+                                  TextStyle(fontSize: 10.0, color: Colors.grey),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     ),
   );
 }
@@ -317,7 +318,7 @@ Widget _buildAppItemRow(String appIconName, String appName, String appDesc) {
   return new GestureDetector(
     behavior: HitTestBehavior.opaque,
     onTap: () {
-      _toAppDetail();
+      _toAppDetail(new AppModel(appIconName, appName, appDesc));
     },
     child: new Container(
       width: pageWidth,
@@ -458,7 +459,11 @@ Widget _buildAppItemDivider() {
   );
 }
 
-void _toAppDetail() {
-  Navigator.push(buildContext,
-      MaterialPageRoute(builder: (context) => new AppDetailDemo()));
+void _toAppDetail(AppModel appModel) {
+  Navigator.push(
+      buildContext,
+      MaterialPageRoute(
+          builder: (context) => new AppDetailDemo(
+                appModel: appModel,
+              )));
 }

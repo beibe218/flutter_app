@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/demo/app_model.dart';
 
 class AppDetailDemo extends StatelessWidget {
+  final AppModel appModel;
+
+  AppDetailDemo({Key key, @required this.appModel}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +16,8 @@ class AppDetailDemo extends StatelessWidget {
       body: new ListView(
         children: <Widget>[
 //          const Padding(padding: EdgeInsets.only(top: 16.0)),
-          _buildAppInfoRow(),
+          _buildAppInfoRow(
+              appModel.iconRes, appModel.title, appModel.description),
           _buildScoreRow(),
           const Padding(padding: EdgeInsets.only(top: 16.0)),
           _buildAppPictureRow()
@@ -30,7 +36,7 @@ Widget _buildDivider() {
   );
 }
 
-Widget _buildAppInfoRow() {
+Widget _buildAppInfoRow(String iconRes, String title, String desc) {
   return new Padding(
     padding: EdgeInsets.symmetric(horizontal: 16.0),
     child: new Row(
@@ -40,10 +46,11 @@ Widget _buildAppInfoRow() {
           height: 120.0,
           decoration: new BoxDecoration(
               image: new DecorationImage(
-                  image: AssetImage('images/ic_momo.png'), fit: BoxFit.cover),
-              borderRadius: new BorderRadius.all(Radius.circular(16.0)),
+                  image: AssetImage('images/${iconRes}'), fit: BoxFit.cover),
+              borderRadius: new BorderRadius.all(Radius.circular(28.0)),
               border: new Border.all(
-                  width: 1.0, color: CupertinoColors.lightBackgroundGray)),
+                  width: 1.0, color: CupertinoColors.lightBackgroundGray)
+          ),
         ),
         Expanded(
             child: new Container(
@@ -57,11 +64,12 @@ Widget _buildAppInfoRow() {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   new Text(
-                    'MOMO陌陌',
+                    title,
                     style: TextStyle(fontSize: 22.0, color: Colors.black),
                   ),
+                  const Padding(padding: EdgeInsets.only(top: 5.0)),
                   new Text(
-                    '很高兴认识你',
+                    desc,
                     style: TextStyle(fontSize: 16.0, color: Colors.grey),
                   ),
                 ],
