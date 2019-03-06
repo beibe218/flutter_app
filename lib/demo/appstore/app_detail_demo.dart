@@ -10,8 +10,9 @@ class AppDetailDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('AppDetail'),
+      appBar: new CupertinoNavigationBar(
+        middle: new Text(appModel.title),
+//        trailing: const ExitButton(),
       ),
       body: new ListView(
         children: <Widget>[
@@ -23,6 +24,26 @@ class AppDetailDemo extends StatelessWidget {
           _buildAppPictureRow()
         ],
       ),
+    );
+  }
+}
+
+class ExitButton extends StatelessWidget {
+  const ExitButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return new CupertinoButton(
+      padding: EdgeInsets.zero,
+      child: const Tooltip(
+        message: 'Back',
+//        child: const Text('Exit'),
+        excludeFromSemantics: true,
+      ),
+      onPressed: () {
+        // The demo is on the root navigator.
+        Navigator.of(context, rootNavigator: true).pop();
+      },
     );
   }
 }
@@ -49,8 +70,7 @@ Widget _buildAppInfoRow(String iconRes, String title, String desc) {
                   image: AssetImage('images/${iconRes}'), fit: BoxFit.cover),
               borderRadius: new BorderRadius.all(Radius.circular(28.0)),
               border: new Border.all(
-                  width: 1.0, color: CupertinoColors.lightBackgroundGray)
-          ),
+                  width: 1.0, color: CupertinoColors.lightBackgroundGray)),
         ),
         Expanded(
             child: new Container(

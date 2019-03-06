@@ -261,6 +261,9 @@ Widget _buildItem3(String smallTitle, String normalTitle, Color smallTitleColor,
           new Expanded(
               child: new Container(
             decoration: new BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(16.0),
+                  topRight: const Radius.circular(16.0)),
               image: new DecorationImage(
                   image: AssetImage('images/${picName}'), fit: BoxFit.cover),
             ),

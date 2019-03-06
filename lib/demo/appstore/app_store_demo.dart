@@ -10,11 +10,11 @@ class AppStoreDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     buildContext = context;
-    return Scaffold(
-      appBar: new AppBar(
-        title: Text('AppStore'),
+    return new Scaffold(
+      appBar: const CupertinoNavigationBar(
+        middle: const Text('AppSotre'),
       ),
-      body: ListView(
+      body: new ListView(
         children: <Widget>[
           _buildHotView(),
           _buildDivider(),
@@ -23,10 +23,18 @@ class AppStoreDemo extends StatelessWidget {
           _buildRecommendAppView(),
           _buildDivider(),
           _buildFreshAppView(),
+          _buildPaddingTop8(),
+          _buildPaddingTop8(),
+          _buildDivider(),
+          _buildHotView(),
         ],
       ),
     );
   }
+}
+
+Padding _buildPaddingTop8() {
+  return const Padding(padding: EdgeInsets.only(top: 8.0));
 }
 
 Widget _buildHotView() {
@@ -48,7 +56,7 @@ Widget _buildHotView() {
 
 Widget _buildDivider() {
   return Container(
-    margin: EdgeInsets.only(left: 8.0, right: 8.0),
+    margin: EdgeInsets.only(left: 16.0, right: 16.0),
     child: new Divider(
       height: 1.0,
     ),
@@ -59,7 +67,7 @@ Widget _buildHotItem(String hotTitle, Color color, String title, String desc,
     String pictureName) {
   return Container(
     width: pageWidth,
-    margin: EdgeInsets.all(8.0),
+    margin: EdgeInsets.all(16.0),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -109,7 +117,7 @@ Widget _buildHotAppView() {
       children: <Widget>[
         _buildTitleView('热门应用'),
         SizedBox(
-          height: 201.0,
+          height: 193.0,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
@@ -131,17 +139,19 @@ Widget _buildHotAppItems(String title, String desc, String title2, String desc2,
     String iconName1, String iconName2) {
   return new Container(
     width: pageWidth,
-    height: 201.0,
-    margin: EdgeInsets.only(left: 8.0, right: 8.0),
+    height: 193.0,
+    margin: EdgeInsets.symmetric(horizontal: 16.0),
     child: Column(
       children: <Widget>[
         _buildHotAppItem(title, desc, iconName1),
+        _buildPaddingTop8(),
         new Container(
           margin: EdgeInsets.only(left: 88.0),
           child: new Divider(
             height: 1.0,
           ),
         ),
+        _buildPaddingTop8(),
         _buildHotAppItem(title2, desc2, iconName2),
       ],
     ),
@@ -155,7 +165,6 @@ Widget _buildHotAppItem(String title, String desc, String iconName) {
       _toAppDetail(new AppModel(iconName, title, desc));
     },
     child: Container(
-      margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
       height: 80.0,
       width: pageWidth,
       child: Row(
@@ -238,7 +247,7 @@ Widget _buildHotAppItem(String title, String desc, String iconName) {
 
 Widget _buildTitleView(String title) {
   return Container(
-      margin: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 16.0),
+      margin: EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -297,7 +306,7 @@ Widget _buildRecommendAppView() {
 Widget _buildRecommendAppItem(String desc, String pictureName,
     String appIconName, String appName, String appDesc) {
   return new Container(
-    margin: EdgeInsets.all(8.0),
+    margin: EdgeInsets.symmetric(horizontal: 16.0),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -308,7 +317,10 @@ Widget _buildRecommendAppItem(String desc, String pictureName,
           ),
         ),
         Expanded(child: _buildImageItem(pictureName)),
-        _buildAppItemRow(appIconName, appName, appDesc)
+        _buildPaddingTop8(),
+        _buildAppItemRow(appIconName, appName, appDesc),
+        _buildPaddingTop8(),
+        _buildPaddingTop8(),
       ],
     ),
   );
@@ -398,7 +410,7 @@ Widget _buildAppItemRow(String appIconName, String appName, String appDesc) {
 Widget _buildImageItem(String imageName) {
   return new Container(
     width: pageWidth,
-    margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
+    margin: EdgeInsets.only(top: 8.0),
     decoration: BoxDecoration(
       image: DecorationImage(
         image: AssetImage('images/' + imageName),
@@ -418,7 +430,7 @@ Widget _buildFreshAppView() {
       children: <Widget>[
         _buildTitleView('新鲜App'),
         new SizedBox(
-            height: 280.0,
+            height: 240.0,
             child: new ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
@@ -434,11 +446,11 @@ Widget _buildFreshAppView() {
 
 Widget _buildFreshAppItem() {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 8.0),
-    height: 270.0,
+    margin: EdgeInsets.symmetric(horizontal: 16.0),
+    height: 234.0,
     width: pageWidth,
     child: new Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         _buildAppItemRow('ic_wechat.png', '微信', '社交'),
         _buildAppItemDivider(),
