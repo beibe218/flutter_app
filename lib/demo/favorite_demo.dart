@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/demo/app_store_demo.dart';
+import 'package:flutter_app/demo/appstore/app_store_demo.dart';
+import 'package:flutter_app/demo/appstore/app_store_main.dart';
 import 'package:flutter_app/demo/horizontally_demo.dart';
 import 'package:flutter_app/demo/list_demo.dart';
 
@@ -117,7 +119,7 @@ class FavoriteDemo extends StatelessWidget {
       return new RawMaterialButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => route));
+              context, new CupertinoPageRoute(builder: (context) => route));
         },
         child: _buildButtonColumn(color, icon, label),
       );
@@ -130,7 +132,7 @@ class FavoriteDemo extends StatelessWidget {
           _buildRawMaterialButton(color, Icons.call, 'CALL', new ListDemo()),
           _buildRawMaterialButton(
               color, Icons.near_me, 'ROUTE', new AppStoreDemo()),
-          _buildRawMaterialButton(color, Icons.share, 'SHARE', new ListDemo()),
+          _buildRawMaterialButton(color, Icons.share, 'SHARE', new AppStoreMain()),
         ],
       ),
     );

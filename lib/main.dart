@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/demo/favorite_demo.dart';
+import 'package:flutter_app/demo/appstore/app_store_main.dart';
 
 void main() =>
     runApp(
@@ -8,6 +8,6 @@ void main() =>
               primaryColor: Colors.red
           ),
           title: 'Fluter',
-          home: new FavoriteDemo(),
+          home: new AppStoreMain(),
         )
     );

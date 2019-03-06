@@ -44,6 +44,10 @@ flutter:
     - images/pic_momo_3.png
     - images/pic_momo_4.png
     - images/pic_momo_5.png
+    - images/pic_chiji_1.jpg
+    - images/pic_today_2.jpg
+    - images/pic_today_3.png
+    - images/pic_today_4.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
