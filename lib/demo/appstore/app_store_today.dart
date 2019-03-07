@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/demo/appstore/model/app_today_detail_model.dart';
+
+BuildContext buildContext;
 
 class AppStoreToday extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    buildContext = context;
     return new Scaffold(
-      backgroundColor: Colors.white,
       body: new Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: new ListView(
@@ -13,7 +16,7 @@ class AppStoreToday extends StatelessWidget {
             _buildPaddingTop8(),
             _buildTitle(),
             _buildPaddingTop8(),
-            _buildItem3('', '', Colors.white, Colors.white, 'pic_chiji_1.jpg'),
+            _buildItem3('精选游戏', '绝地求生刺激战场','徒步生存之旅', Colors.white, Colors.white, 'pic_chiji_1.jpg'),
             _buildPaddingTop8(),
             _buildItem2(),
             _buildPaddingTop8(),
@@ -75,24 +78,29 @@ Widget _buildTitle() {
 
 Widget _buildItem1(String smallTitle, String normalTitle, Color smallTitleColor,
     Color titleColor, String picName) {
-  return new Container(
-    height: 550.0,
-    child: new Card(
-      elevation: 1.5,
-      shape: _buildItemShape(),
-      child: new Container(
-        decoration: new BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('images/${picName}'), fit: BoxFit.cover),
-            borderRadius: BorderRadius.all(Radius.circular(16.0))),
-        padding: EdgeInsets.all(16.0),
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _buildSmallTitle(smallTitle, smallTitleColor),
-            _buildPaddingTop8(),
-            _buildNormalTitle(normalTitle, Colors.white)
-          ],
+  return new GestureDetector(
+    onTap: () {
+      toItemDetail(smallTitle, normalTitle, picName, normalTitle);
+    },
+    child: new Container(
+      height: 550.0,
+      child: new Card(
+        elevation: 3.0,
+        shape: _buildItemShape(),
+        child: new Container(
+          decoration: new BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('images/${picName}'), fit: BoxFit.cover),
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),
+          padding: EdgeInsets.all(16.0),
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _buildSmallTitle(smallTitle, smallTitleColor),
+              _buildPaddingTop8(),
+              _buildNormalTitle(normalTitle, Colors.white)
+            ],
+          ),
         ),
       ),
     ),
@@ -117,7 +125,7 @@ Widget _buildItem2() {
       borderRadius: BorderRadius.all(Radius.circular(16.0)),
     ),
     child: new Card(
-      elevation: 1.5,
+      elevation: 3.0,
       shape: _buildItemShape(),
       child: new Padding(
         padding: EdgeInsets.all(16.0),
@@ -248,40 +256,205 @@ Widget _buildAppItemRow(String appIconName, String appName, String appDesc) {
   );
 }
 
-Widget _buildItem3(String smallTitle, String normalTitle, Color smallTitleColor,
+void toItemDetail(
+    String smallTitle, String normalTitle, String picName, contentTitle) {
+  List<DetailItem> items = new List();
+  items.add(new DetailItem(0, contentTitle));
+  items.add(new DetailItem(
+      1,
+      '噫吁嚱，危乎高哉！蜀道之难，难于上青天！蚕丛及鱼凫，开国何茫然！尔来四万八千岁，不与秦塞通人烟。'
+      '西当太白有鸟道，可以横绝峨眉巅。'
+      '地崩山摧壮士死，然后天梯石栈相钩连。'
+      '上有六龙回日之高标，下有冲波逆折之回川。'
+      '黄鹤之飞尚不得过，猿猱欲度愁攀援。'));
+  items.add(new DetailItem(2, 'pic_chiji_1.jpg'));
+
+  items.add(new DetailItem(0, '绝地求生刺激战场 为什么这么好玩？'));
+  items.add(new DetailItem(
+      1,
+      '青泥何盘盘，百步九折萦岩峦。'
+      '扪参历井仰胁息，以手抚膺坐长叹。'
+      '问君西游何时还？畏途巉岩不可攀。'
+      '但见悲鸟号古木，雄飞雌从绕林间。'
+      '又闻子规啼夜月，愁空山。'));
+
+  items.add(new DetailItem(2, 'picture_zhifouzhifou.png'));
+
+  items.add(new DetailItem(
+      1,
+      '蜀道之难，难于上青天，使人听此凋朱颜！连峰去天不盈尺，枯松倒挂倚绝壁。'
+      '飞湍瀑流争喧豗，砯崖转石万壑雷。'
+      '其险也如此，嗟尔远道之人胡为乎来哉！剑阁峥嵘而崔嵬，一夫当关，万夫莫开。'
+      '所守或匪亲，化为狼与豺。朝避猛虎，夕避长蛇；磨牙吮血，杀人如麻。'
+      '锦城虽云乐，不如早还家。蜀道之难，难于上青天，侧身西望长咨嗟！'));
+
+  var model = new AppTodayDetailModel(smallTitle, normalTitle, picName, items);
+
+  Navigator.push(
+      buildContext,
+      CupertinoPageRoute(
+          builder: (context) => new Item3DetailPage(model),
+          fullscreenDialog: true));
+}
+
+Widget _buildItem3(String smallTitle, String normalTitle,String smallTitle2, Color smallTitleColor,
     Color titleColor, String picName) {
+  return GestureDetector(
+    onTap: () {
+      toItemDetail(smallTitle, normalTitle, picName, normalTitle);
+    },
+    child: new Container(
+      height: 550.0,
+      child: new Card(
+        elevation: 3.0,
+        shape: _buildItemShape(),
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            new Expanded(
+                child: new Container(
+              decoration: new BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: const Radius.circular(16.0),
+                    topRight: const Radius.circular(16.0)),
+                image: new DecorationImage(
+                    image: AssetImage('images/${picName}'), fit: BoxFit.cover),
+              ),
+            )),
+            new Padding(
+              padding: EdgeInsets.all(16.0),
+              child: new Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  _buildSmallTitle(smallTitle, Colors.grey),
+                  _buildPaddingTop8(),
+                  _buildNormalTitle(normalTitle, Colors.black),
+                  _buildPaddingTop8(),
+                  _buildSmallTitle(smallTitle2, Colors.grey),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+class Item3DetailPage extends StatelessWidget {
+  AppTodayDetailModel model;
+
+  Item3DetailPage(this.model);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: new Stack(
+        alignment: Alignment(0.9, -0.9),
+        children: <Widget>[_buildItemDetailPage(model), _buildExitButton()],
+      ),
+    );
+  }
+}
+
+Widget _buildItemDetailPage(AppTodayDetailModel model) {
+  List<DetailItem> items = model.detailItems;
+  return new ListView.builder(
+    itemBuilder: (BuildContext _context, int index) {
+      if (index > 0) {
+        DetailItem item = items[index - 1];
+        switch (item.type) {
+          case 0:
+            return _buildItemDetailTitleText(item.content);
+            break;
+          case 1:
+            return _buildItemDetailContentText(item.content);
+            break;
+          case 2:
+            return _buildItemDetailPictureView(item.content);
+            break;
+        }
+      } else {
+        return _buildItemDetailHeadView(
+            model.picName, model.smallTitle, model.normalTitle);
+      }
+    },
+    itemCount: items.length + 1,
+  );
+}
+
+Widget _buildItemDetailPictureView(String content) {
   return new Container(
-    height: 550.0,
-    child: new Card(
-      elevation: 1.5,
-      shape: _buildItemShape(),
-      child: new Column(
+    height: 300.0,
+    child: Image.asset(
+      'images/${content}',
+      fit: BoxFit.cover,
+    ),
+  );
+}
+
+Widget _buildItemDetailContentText(String contentText) {
+  return new Padding(
+    padding: EdgeInsets.all(16.0),
+    child: new Text(
+      contentText,
+      style: new TextStyle(fontSize: 20.0, color: Colors.grey, height: 1.5),
+    ),
+  );
+}
+
+Widget _buildItemDetailTitleText(String titleText) {
+  return new Padding(
+    padding: EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+    child: new Text(
+      titleText,
+      style: new TextStyle(
+          fontSize: 28.0, color: Colors.black, fontWeight: FontWeight.w700),
+    ),
+  );
+}
+
+Widget _buildItemDetailHeadView(
+    String picName, String smallTitle, String normalTitle) {
+  return new Container(
+    height: 500.0,
+    decoration: new BoxDecoration(
+        image: new DecorationImage(
+            image: AssetImage('images/${picName}'), fit: BoxFit.cover)),
+    child: new Padding(
+      padding: EdgeInsets.all(16.0),
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new Expanded(
-              child: new Container(
-            decoration: new BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(16.0),
-                  topRight: const Radius.circular(16.0)),
-              image: new DecorationImage(
-                  image: AssetImage('images/${picName}'), fit: BoxFit.cover),
-            ),
-          )),
-          new Padding(
-            padding: EdgeInsets.all(16.0),
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _buildSmallTitle('精选游戏', Colors.grey),
-                _buildPaddingTop8(),
-                _buildNormalTitle('绝地求生刺激战场', Colors.black),
-                _buildPaddingTop8(),
-                _buildSmallTitle('徒步生存之旅', Colors.grey),
-              ],
-            ),
-          )
+          new Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _buildSmallTitle(smallTitle, Colors.white),
+              _buildPaddingTop8(),
+              _buildNormalTitle(normalTitle, Colors.white)
+            ],
+          ),
         ],
+      ),
+    ),
+  );
+}
+
+Widget _buildExitButton() {
+  return new GestureDetector(
+    onTap: () {
+      Navigator.pop(buildContext);
+    },
+    child: new Container(
+      width: 30.0,
+      height: 30.0,
+      decoration: new BoxDecoration(
+          color: Colors.white70,
+          borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      child: const Icon(
+        Icons.close,
+        color: Colors.black,
       ),
     ),
   );

@@ -5,7 +5,8 @@ void main() =>
     runApp(
         MaterialApp(
           theme: ThemeData(
-              primaryColor: Colors.red
+              primaryColor: Colors.red,
+              primaryColorDark: Colors.red
           ),
           title: 'Fluter',
           home: new AppStoreMain(),
