@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/demo/appstore/model/app_today_detail_model.dart';
 
 BuildContext buildContext;
@@ -16,7 +17,8 @@ class AppStoreToday extends StatelessWidget {
             _buildPaddingTop8(),
             _buildTitle(),
             _buildPaddingTop8(),
-            _buildItem3('精选游戏', '绝地求生刺激战场','徒步生存之旅', Colors.white, Colors.white, 'pic_chiji_1.jpg'),
+            _buildItem3('精选游戏', '绝地求生刺激战场', '徒步生存之旅', Colors.white,
+                Colors.white, 'pic_chiji_1.jpg'),
             _buildPaddingTop8(),
             _buildItem2(),
             _buildPaddingTop8(),
@@ -290,15 +292,15 @@ void toItemDetail(
 
   var model = new AppTodayDetailModel(smallTitle, normalTitle, picName, items);
 
-  Navigator.push(
-      buildContext,
-      CupertinoPageRoute(
-          builder: (context) => new Item3DetailPage(model),
-          fullscreenDialog: true));
+  showDialog(
+    context: buildContext,
+    barrierDismissible: false,
+    builder: (BuildContext context) => new Item3DetailPage(model),
+  );
 }
 
-Widget _buildItem3(String smallTitle, String normalTitle,String smallTitle2, Color smallTitleColor,
-    Color titleColor, String picName) {
+Widget _buildItem3(String smallTitle, String normalTitle, String smallTitle2,
+    Color smallTitleColor, Color titleColor, String picName) {
   return GestureDetector(
     onTap: () {
       toItemDetail(smallTitle, normalTitle, picName, normalTitle);
@@ -350,8 +352,11 @@ class Item3DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: new Stack(
-        alignment: Alignment(0.9, -0.9),
-        children: <Widget>[_buildItemDetailPage(model), _buildExitButton()],
+        alignment: Alignment(0.9, -0.95),
+        children: <Widget>[
+          _buildItemDetailPage(model),
+          _buildExitButton(context)
+        ],
       ),
     );
   }
@@ -441,10 +446,10 @@ Widget _buildItemDetailHeadView(
   );
 }
 
-Widget _buildExitButton() {
+Widget _buildExitButton(BuildContext _context) {
   return new GestureDetector(
     onTap: () {
-      Navigator.pop(buildContext);
+      Navigator.pop(_context);
     },
     child: new Container(
       width: 30.0,

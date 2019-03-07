@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/demo/appstore/app_store_demo.dart';
 import 'package:flutter_app/demo/appstore/app_store_today.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_app/demo/list_demo.dart';
 class AppStoreMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+//    SystemChrome.setEnabledSystemUIOverlays([]);
     return WillPopScope(
         child: new CupertinoTabScaffold(
           tabBar: new CupertinoTabBar(items: const <BottomNavigationBarItem>[
