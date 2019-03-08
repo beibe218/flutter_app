@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +10,12 @@ BuildContext buildContext;
 class AppStoreToday extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //更改状态栏颜色
+//    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+//      statusBarColor: Colors.white,
+//    ));
+    // 隐藏状态栏
+//    SystemChrome.setEnabledSystemUIOverlays([]);
     buildContext = context;
     return new Scaffold(
       body: new Padding(
@@ -258,8 +266,8 @@ Widget _buildAppItemRow(String appIconName, String appName, String appDesc) {
   );
 }
 
-void toItemDetail(
-    String smallTitle, String normalTitle, String picName, contentTitle) {
+Future toItemDetail(
+    String smallTitle, String normalTitle, String picName, contentTitle) async {
   List<DetailItem> items = new List();
   items.add(new DetailItem(0, contentTitle));
   items.add(new DetailItem(
@@ -292,11 +300,17 @@ void toItemDetail(
 
   var model = new AppTodayDetailModel(smallTitle, normalTitle, picName, items);
 
-  showDialog(
-    context: buildContext,
-    barrierDismissible: false,
-    builder: (BuildContext context) => new Item3DetailPage(model),
-  );
+//  showDialog(
+//    context: buildContext,
+//    barrierDismissible: false,
+//    builder: (BuildContext context) => new Item3DetailPage(model),
+//  );
+  Navigator
+      .of(
+        buildContext,
+        rootNavigator: true,
+      )
+      .push(new TutorialOverlay(model));
 }
 
 Widget _buildItem3(String smallTitle, String normalTitle, String smallTitle2,
@@ -449,7 +463,7 @@ Widget _buildItemDetailHeadView(
 Widget _buildExitButton(BuildContext _context) {
   return new GestureDetector(
     onTap: () {
-      Navigator.pop(_context);
+      Navigator.pop(_context, '10086');
     },
     child: new Container(
       width: 30.0,
@@ -463,4 +477,64 @@ Widget _buildExitButton(BuildContext _context) {
       ),
     ),
   );
+}
+
+class TutorialOverlay extends ModalRoute<void> {
+  AppTodayDetailModel model;
+
+  TutorialOverlay(this.model);
+
+  @override
+  Duration get transitionDuration => Duration(milliseconds: 300);
+
+  @override
+  bool get opaque => false;
+
+  @override
+  bool get barrierDismissible => false;
+
+  @override
+  Color get barrierColor => Colors.black.withOpacity(0.5);
+
+  @override
+  String get barrierLabel => null;
+
+  @override
+  bool get maintainState => true;
+
+  @override
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
+//    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+//      statusBarColor: Colors.transparent,
+//    ));
+//    SystemChrome.setEnabledSystemUIOverlays([]);
+
+    // This makes sure that text and other content follows the material style
+    return Scaffold(
+      body: new Stack(
+        alignment: Alignment(0.9, -0.9),
+        children: <Widget>[
+          _buildItemDetailPage(model),
+          _buildExitButton(context)
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+    // You can add your own animations for the overlay content
+    return FadeTransition(
+      opacity: animation,
+      child: ScaleTransition(
+        scale: animation,
+        child: child,
+      ),
+    );
+  }
 }

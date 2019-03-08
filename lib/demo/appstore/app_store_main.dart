@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/demo/appstore/app_store_demo.dart';
@@ -10,7 +12,20 @@ import 'package:flutter_app/demo/list_demo.dart';
 class AppStoreMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-//    SystemChrome.setEnabledSystemUIOverlays([]);
+//    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+//      SystemChrome.setSystemUIOverlayStyle(new SystemUiOverlayStyle(
+//        statusBarColor: Colors.white,
+//          statusBarBrightness: Brightness.dark,
+//          statusBarIconBrightness: Brightness.dark
+//      ));
+    if (Platform.isAndroid) {
+      SystemChrome.setSystemUIOverlayStyle(
+          new SystemUiOverlayStyle(statusBarColor: Colors.black));
+    } else if (Platform.isIOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+          new SystemUiOverlayStyle(statusBarColor: Colors.white));
+    }
+
     return WillPopScope(
         child: new CupertinoTabScaffold(
           tabBar: new CupertinoTabBar(items: const <BottomNavigationBarItem>[
@@ -20,16 +35,13 @@ class AppStoreMain extends StatelessWidget {
             ),
             const BottomNavigationBarItem(
                 icon: const Icon(CupertinoIcons.plus_circled),
-                title: const Text('App')
-            ),
+                title: const Text('App')),
             const BottomNavigationBarItem(
                 icon: const Icon(CupertinoIcons.down_arrow),
-                title: const Text('更新')
-            ),
+                title: const Text('更新')),
             const BottomNavigationBarItem(
                 icon: const Icon(CupertinoIcons.search),
-                title: const Text('搜素')
-            )
+                title: const Text('搜素'))
           ]),
           tabBuilder: (BuildContext context, int index) {
             return new CupertinoTabView(
