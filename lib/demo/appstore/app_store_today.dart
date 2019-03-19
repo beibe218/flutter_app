@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_app/demo/appstore/model/app_today_detail_model.dart';
+import 'package:video_player/video_player.dart';
 
 BuildContext buildContext;
 
@@ -26,7 +24,7 @@ class AppStoreToday extends StatelessWidget {
             _buildTitle(),
             _buildPaddingTop8(),
             _buildItem3('精选游戏', '绝地求生刺激战场', '徒步生存之旅', Colors.white,
-                Colors.white, 'pic_chiji_1.jpg'),
+                Colors.white, 'pic_chiji_1.jpg', false),
             _buildPaddingTop8(),
             _buildItem2(),
             _buildPaddingTop8(),
@@ -36,6 +34,9 @@ class AppStoreToday extends StatelessWidget {
             _buildPaddingTop8(),
             _buildItem1('电子竞技', '《我的世界》为什么\n好玩？', Colors.white, Colors.white,
                 'pic_today_2.jpg'),
+            _buildPaddingTop8(),
+            _buildItem3('精选游戏', '绝地求生刺激战场', '徒步生存之旅', Colors.white,
+                Colors.white, 'pic_chiji_1.jpg', true),
             _buildPaddingTop8(),
           ],
         ),
@@ -166,10 +167,6 @@ Widget _buildItem2() {
                 _buildAppItemDivider(),
                 _buildPaddingTop8(),
                 _buildAppItemRow('ic_qq.png', 'QQ', '社交'),
-//                _buildPaddingTop8(),
-//                _buildAppItemDivider(),
-//                _buildPaddingTop8(),
-//                _buildAppItemRow('ic_taobao.png', '淘宝', '随时随地想淘就淘'),
               ],
             ))
           ],
@@ -266,8 +263,8 @@ Widget _buildAppItemRow(String appIconName, String appName, String appDesc) {
   );
 }
 
-Future toItemDetail(
-    String smallTitle, String normalTitle, String picName, contentTitle) async {
+void toItemDetail(
+    String smallTitle, String normalTitle, String picName, contentTitle) {
   List<DetailItem> items = new List();
   items.add(new DetailItem(0, contentTitle));
   items.add(new DetailItem(
@@ -300,21 +297,19 @@ Future toItemDetail(
 
   var model = new AppTodayDetailModel(smallTitle, normalTitle, picName, items);
 
-//  showDialog(
-//    context: buildContext,
-//    barrierDismissible: false,
-//    builder: (BuildContext context) => new Item3DetailPage(model),
-//  );
+//  Navigator
+//      .of(
+//        buildContext,
+//        rootNavigator: true,
+//      )
+//      .push(new ItemDetailPage(model));
   Navigator
-      .of(
-        buildContext,
-        rootNavigator: true,
-      )
-      .push(new TutorialOverlay(model));
+      .of(buildContext, rootNavigator: true)
+      .push(new CupertinoPageRoute(builder: (_context) => new VideoItem()));
 }
 
 Widget _buildItem3(String smallTitle, String normalTitle, String smallTitle2,
-    Color smallTitleColor, Color titleColor, String picName) {
+    Color smallTitleColor, Color titleColor, String picName, bool isVideo) {
   return GestureDetector(
     onTap: () {
       toItemDetail(smallTitle, normalTitle, picName, normalTitle);
@@ -328,15 +323,18 @@ Widget _buildItem3(String smallTitle, String normalTitle, String smallTitle2,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Expanded(
-                child: new Container(
-              decoration: new BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(16.0),
-                    topRight: const Radius.circular(16.0)),
-                image: new DecorationImage(
-                    image: AssetImage('images/${picName}'), fit: BoxFit.cover),
-              ),
-            )),
+                child: isVideo
+                    ? new VideoItem()
+                    : new Container(
+                        decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: const Radius.circular(16.0),
+                              topRight: const Radius.circular(16.0)),
+                          image: new DecorationImage(
+                              image: AssetImage('images/${picName}'),
+                              fit: BoxFit.cover),
+                        ),
+                      )),
             new Padding(
               padding: EdgeInsets.all(16.0),
               child: new Column(
@@ -355,25 +353,6 @@ Widget _buildItem3(String smallTitle, String normalTitle, String smallTitle2,
       ),
     ),
   );
-}
-
-class Item3DetailPage extends StatelessWidget {
-  AppTodayDetailModel model;
-
-  Item3DetailPage(this.model);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: new Stack(
-        alignment: Alignment(0.9, -0.95),
-        children: <Widget>[
-          _buildItemDetailPage(model),
-          _buildExitButton(context)
-        ],
-      ),
-    );
-  }
 }
 
 Widget _buildItemDetailPage(AppTodayDetailModel model) {
@@ -463,7 +442,7 @@ Widget _buildItemDetailHeadView(
 Widget _buildExitButton(BuildContext _context) {
   return new GestureDetector(
     onTap: () {
-      Navigator.pop(_context, '10086');
+      Navigator.pop(_context);
     },
     child: new Container(
       width: 30.0,
@@ -479,10 +458,10 @@ Widget _buildExitButton(BuildContext _context) {
   );
 }
 
-class TutorialOverlay extends ModalRoute<void> {
+class ItemDetailPage extends ModalRoute<void> {
   AppTodayDetailModel model;
 
-  TutorialOverlay(this.model);
+  ItemDetailPage(this.model);
 
   @override
   Duration get transitionDuration => Duration(milliseconds: 300);
@@ -508,11 +487,6 @@ class TutorialOverlay extends ModalRoute<void> {
     Animation<double> animation,
     Animation<double> secondaryAnimation,
   ) {
-//    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-//      statusBarColor: Colors.transparent,
-//    ));
-//    SystemChrome.setEnabledSystemUIOverlays([]);
-
     // This makes sure that text and other content follows the material style
     return Scaffold(
       body: new Stack(
@@ -534,6 +508,63 @@ class TutorialOverlay extends ModalRoute<void> {
       child: ScaleTransition(
         scale: animation,
         child: child,
+      ),
+    );
+  }
+}
+
+class VideoItem extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => new VideoItemState();
+}
+
+class VideoItemState extends State<VideoItem> {
+  VideoPlayerController _controller;
+  bool _isPlaying = false;
+
+  String url =
+      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4';
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.asset('videos/butterfly.mp4')
+      // 播放状态
+      ..addListener(() {
+        final bool isPlaying = _controller.value.isPlaying;
+        if (isPlaying != _isPlaying) {
+          setState(() {
+            _isPlaying = isPlaying;
+          });
+        }
+      })
+      // 在初始化完成后必须更新界面
+      ..initialize().then((_) {
+        setState(() {
+          _controller.play();
+        });
+      });
+
+    _controller.setLooping(true);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      body: new Center(
+        child: _controller.value.initialized
+            // 加载成功
+            ? new AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              )
+            : const CircularProgressIndicator(),
       ),
     );
   }

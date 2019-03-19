@@ -9,6 +9,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   english_words: ^3.1.0
+  video_player: 0.5.1
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +49,7 @@ flutter:
     - images/pic_today_2.jpg
     - images/pic_today_3.png
     - images/pic_today_4.png
+    - videos/butterfly.mp4
 
   # To add assets to your application, add an assets section, like this:
   # assets:
