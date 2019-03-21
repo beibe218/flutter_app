@@ -16,6 +16,7 @@ class AppStoreToday extends StatelessWidget {
 //    SystemChrome.setEnabledSystemUIOverlays([]);
     buildContext = context;
     return new Scaffold(
+      backgroundColor: Colors.grey[100],
       body: new Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: new ListView(
@@ -94,9 +95,8 @@ Widget _buildItem1(String smallTitle, String normalTitle, Color smallTitleColor,
       toItemDetail(smallTitle, normalTitle, picName, normalTitle);
     },
     child: new Container(
-      height: 550.0,
+      height: 500.0,
       child: new Card(
-        elevation: 3.0,
         shape: _buildItemShape(),
         child: new Container(
           decoration: new BoxDecoration(
@@ -130,13 +130,11 @@ ShapeBorder _buildItemShape() {
 
 Widget _buildItem2() {
   return new Container(
-    height: 550.0,
+    height: 500.0,
     decoration: const BoxDecoration(
-      color: Colors.white,
       borderRadius: BorderRadius.all(Radius.circular(16.0)),
     ),
     child: new Card(
-      elevation: 3.0,
       shape: _buildItemShape(),
       child: new Padding(
         padding: EdgeInsets.all(16.0),
@@ -297,15 +295,21 @@ void toItemDetail(
 
   var model = new AppTodayDetailModel(smallTitle, normalTitle, picName, items);
 
-//  Navigator
-//      .of(
-//        buildContext,
-//        rootNavigator: true,
-//      )
-//      .push(new ItemDetailPage(model));
   Navigator
-      .of(buildContext, rootNavigator: true)
-      .push(new CupertinoPageRoute(builder: (_context) => new VideoItem()));
+      .of(
+        buildContext,
+        rootNavigator: true,
+      )
+      .push(new CupertinoPageRoute(
+          builder: (_context) => new Scaffold(
+                body: new Stack(
+                  alignment: Alignment(0.9, -0.9),
+                  children: <Widget>[
+                    _buildItemDetailPage(model),
+                    _buildExitButton(_context)
+                  ],
+                ),
+              )));
 }
 
 Widget _buildItem3(String smallTitle, String normalTitle, String smallTitle2,
@@ -315,9 +319,8 @@ Widget _buildItem3(String smallTitle, String normalTitle, String smallTitle2,
       toItemDetail(smallTitle, normalTitle, picName, normalTitle);
     },
     child: new Container(
-      height: 550.0,
+      height: isVideo ? 360.0 : 500.0,
       child: new Card(
-        elevation: 3.0,
         shape: _buildItemShape(),
         child: new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -557,15 +560,16 @@ class VideoItemState extends State<VideoItem> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Center(
-        child: _controller.value.initialized
-            // 加载成功
-            ? new AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: VideoPlayer(_controller),
-              )
-            : const CircularProgressIndicator(),
-      ),
+      backgroundColor: Colors.white,
+      body: _controller.value.initialized
+          // 加载成功
+          ? new AspectRatio(
+              aspectRatio: _controller.value.aspectRatio,
+              child: VideoPlayer(_controller),
+            )
+          : new Center(
+              child: const CircularProgressIndicator(),
+            ),
     );
   }
 }
