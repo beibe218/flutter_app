@@ -542,7 +542,7 @@ class VideoItemState extends State<VideoItem> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset('videos/butterfly.mp4')
+    _controller = VideoPlayerController.network(url)
       // 播放状态
       ..addListener(() {
         final bool isPlaying = _controller.value.isPlaying;
@@ -574,10 +574,17 @@ class VideoItemState extends State<VideoItem> {
       backgroundColor: Colors.white,
       body: _controller.value.initialized
           // 加载成功
-          ? new AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
+          ? new Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: const Radius.circular(16.0),
+                    topRight: const Radius.circular(16.0))
+            ),
+            child: new AspectRatio(
+            aspectRatio: _controller.value.aspectRatio,
               child: VideoPlayer(_controller),
-            )
+        ),
+      )
           : new Center(
               child: const CircularProgressIndicator(),
             ),
@@ -588,7 +595,7 @@ class VideoItemState extends State<VideoItem> {
 class AccountInfoPage extends StatelessWidget {
   Widget _buildAccountInfoItem() {
     return new Container(
-      padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 6.0),
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
       color: Colors.white,
       child: Row(
         children: <Widget>[
@@ -610,7 +617,7 @@ class AccountInfoPage extends StatelessWidget {
                   '杨学军',
                   style: const TextStyle(color: Colors.black, fontSize: 18.0),
                 ),
-                const Padding(padding: EdgeInsets.only(top: 8.0)),
+                const Padding(padding: EdgeInsets.only(top: 3.0)),
                 const Text(
                   'jimmyakm@gmail.com',
                   style: const TextStyle(color: Colors.grey, fontSize: 14.0),
@@ -636,6 +643,7 @@ class AccountInfoPage extends StatelessWidget {
       color: Colors.white,
       padding: EdgeInsets.only(left: paddingLeft),
       child: new Divider(
+        color: Colors.grey[400],
         height: 1.0,
       ),
     );
@@ -644,7 +652,7 @@ class AccountInfoPage extends StatelessWidget {
   Widget _buildCommonText(String text, Color color, bool offstageRightChevron) {
     return new Container(
       color: Colors.white,
-      padding: EdgeInsets.fromLTRB(18.0, 16.0, 18.0, 16.0),
+      padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -677,13 +685,13 @@ class AccountInfoPage extends StatelessWidget {
           _buildPadding25(),
           _buildDivider(0.0),
           _buildCommonText('已购项目', Colors.black, false),
-          _buildDivider(18.0),
+          _buildDivider(16.0),
           _buildCommonText('个性化推荐', Colors.black, false),
           _buildDivider(0.0),
           _buildPadding25(),
           _buildDivider(0.0),
           _buildCommonText('兑换礼品卡或代码', Colors.blueAccent, true),
-          _buildDivider(18.0),
+          _buildDivider(16.0),
           _buildCommonText('为 Apple ID 充值', Colors.blueAccent, true),
           _buildDivider(0.0),
           _buildPadding25(),
