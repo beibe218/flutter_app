@@ -75,17 +75,28 @@ Widget _buildTitle() {
           _buildNormalTitle('Today', Colors.black),
         ],
       ),
-      new Container(
-        width: 50.0,
-        height: 50.0,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('images/ic_wechat.png'), fit: BoxFit.cover),
-          shape: BoxShape.circle,
+      new GestureDetector(
+        onTap: () {
+          showAccountInfoPage();
+        },
+        child: new Container(
+          width: 50.0,
+          height: 50.0,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('images/ic_wechat.png'), fit: BoxFit.cover),
+            shape: BoxShape.circle,
+          ),
         ),
       )
     ],
   );
+}
+
+void showAccountInfoPage() {
+  Navigator
+      .of(buildContext, rootNavigator: true)
+      .push(MaterialPageRoute(builder: (context) => new AccountInfoPage()));
 }
 
 Widget _buildItem1(String smallTitle, String normalTitle, Color smallTitleColor,
@@ -570,6 +581,117 @@ class VideoItemState extends State<VideoItem> {
           : new Center(
               child: const CircularProgressIndicator(),
             ),
+    );
+  }
+}
+
+class AccountInfoPage extends StatelessWidget {
+  Widget _buildAccountInfoItem() {
+    return new Container(
+      padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 6.0),
+      color: Colors.white,
+      child: Row(
+        children: <Widget>[
+          new Container(
+            width: 60.0,
+            height: 60.0,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('images/ic_wechat.png'), fit: BoxFit.cover),
+              shape: BoxShape.circle,
+            ),
+          ),
+          const Padding(padding: EdgeInsets.only(left: 8.0)),
+          new Expanded(
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text(
+                  '杨学军',
+                  style: const TextStyle(color: Colors.black, fontSize: 18.0),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 8.0)),
+                const Text(
+                  'jimmyakm@gmail.com',
+                  style: const TextStyle(color: Colors.grey, fontSize: 14.0),
+                )
+              ],
+            ),
+          ),
+          const Icon(
+            CupertinoIcons.right_chevron,
+            color: Colors.grey,
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPadding25() {
+    return new Padding(padding: EdgeInsets.only(top: 25.0));
+  }
+
+  Widget _buildDivider(double paddingLeft) {
+    return Container(
+      color: Colors.white,
+      padding: EdgeInsets.only(left: paddingLeft),
+      child: new Divider(
+        height: 1.0,
+      ),
+    );
+  }
+
+  Widget _buildCommonText(String text, Color color, bool offstageRightChevron) {
+    return new Container(
+      color: Colors.white,
+      padding: EdgeInsets.fromLTRB(18.0, 16.0, 18.0, 16.0),
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          new Text(text, style: new TextStyle(color: color, fontSize: 18.0)),
+          new Offstage(
+            offstage: offstageRightChevron,
+            child: const Icon(
+              CupertinoIcons.right_chevron,
+              color: Colors.grey,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      backgroundColor: Colors.grey[200],
+      appBar: new CupertinoNavigationBar(
+        middle: const Text('账户'),
+      ),
+      body: new ListView(
+        children: <Widget>[
+          _buildPadding25(),
+          _buildDivider(0.0),
+          _buildAccountInfoItem(),
+          _buildDivider(0.0),
+          _buildPadding25(),
+          _buildDivider(0.0),
+          _buildCommonText('已购项目', Colors.black, false),
+          _buildDivider(18.0),
+          _buildCommonText('个性化推荐', Colors.black, false),
+          _buildDivider(0.0),
+          _buildPadding25(),
+          _buildDivider(0.0),
+          _buildCommonText('兑换礼品卡或代码', Colors.blueAccent, true),
+          _buildDivider(18.0),
+          _buildCommonText('为 Apple ID 充值', Colors.blueAccent, true),
+          _buildDivider(0.0),
+          _buildPadding25(),
+          _buildDivider(0.0),
+          _buildCommonText('退出登录', Colors.blueAccent, true),
+          _buildDivider(0.0),
+        ],
+      ),
     );
   }
 }
