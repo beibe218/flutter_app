@@ -54,7 +54,6 @@ class AppStoreMain extends StatelessWidget {
                     return new AppStoreDemo();
                     break;
                   case 2:
-                    return new VideoItem();
                     break;
                   case 3:
                     return new ListDemo();
