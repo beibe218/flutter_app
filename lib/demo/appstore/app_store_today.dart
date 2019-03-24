@@ -333,11 +333,15 @@ class AppStoreTodayState extends State<AppStoreToday> {
                       ? _controller.value.initialized
                           // 加载成功
                           ? new Container(
-                              decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: const Radius.circular(16.0),
-                                      topRight: const Radius.circular(16.0))),
-                              child: VideoPlayer(_controller),
+                              decoration: new BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: const Radius.circular(16.0),
+                                    topRight: const Radius.circular(16.0)),
+                                image: new DecorationImage(
+                                    image: AssetImage('images/${picName}'),
+                                    fit: BoxFit.cover),
+                              ),
+//                              child: new VideoPlayer(_controller),
                             )
                           : new Center(
                               child: const CircularProgressIndicator(),

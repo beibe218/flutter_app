@@ -18,13 +18,13 @@ class AppStoreMain extends StatelessWidget {
 //          statusBarBrightness: Brightness.dark,
 //          statusBarIconBrightness: Brightness.dark
 //      ));
-    if (Platform.isAndroid) {
-      SystemChrome.setSystemUIOverlayStyle(
-          new SystemUiOverlayStyle(statusBarColor: Colors.black));
-    } else if (Platform.isIOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-          new SystemUiOverlayStyle(statusBarColor: Colors.white));
-    }
+//    if (Platform.isAndroid) {
+//      SystemChrome.setSystemUIOverlayStyle(
+//          new SystemUiOverlayStyle(statusBarColor: Colors.black));
+//    } else if (Platform.isIOS) {
+//      SystemChrome.setSystemUIOverlayStyle(
+//          new SystemUiOverlayStyle(statusBarColor: Colors.white));
+//    }
 
     return WillPopScope(
         child: new CupertinoTabScaffold(
