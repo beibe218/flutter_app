@@ -10,6 +10,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   english_words: ^3.1.0
   video_player: 0.10.0+2
+  flutter_native_log: "^0.3.0"
 
 dev_dependencies:
   flutter_test:

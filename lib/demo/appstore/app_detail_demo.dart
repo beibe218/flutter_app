@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/demo/appstore/app_model.dart';
 
 class AppDetailDemo extends StatelessWidget {

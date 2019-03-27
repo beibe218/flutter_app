@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/demo/appstore/model/app_today_detail_model.dart';
 import 'package:video_player/video_player.dart';
 
@@ -27,8 +28,10 @@ class AppStoreToday extends StatefulWidget {
 
 class AppStoreTodayState extends State<AppStoreToday> {
   BuildContext _context;
-  VideoPlayerController _controller;
-  bool _isPlaying = false;
+
+//  VideoPlayerController _controller;
+
+//  bool _isPlaying = false;
 
   String url =
       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4';
@@ -36,35 +39,40 @@ class AppStoreTodayState extends State<AppStoreToday> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset('videos/butterfly.mp4')
+    SystemChrome.setSystemUIOverlayStyle(new SystemUiOverlayStyle(
+        statusBarColor: Colors.grey[100],
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark));
+//    _controller = VideoPlayerController.asset('videos/butterfly.mp4');
 //    _controller = VideoPlayerController.network(url)
-      // 播放状态
-      ..addListener(() {
-        final bool isPlaying = _controller.value.isPlaying;
-        if (isPlaying != _isPlaying) {
-          setState(() {
-            _isPlaying = isPlaying;
-          });
-        }
-      })
-      // 在初始化完成后必须更新界面
-      ..initialize().then((_) {
-        setState(() {
-          _controller.play();
-        });
-      });
-
-    _controller.setLooping(true);
+    // 播放状态
+//      ..addListener(() {
+//        final bool isPlaying = _controller.value.isPlaying;
+//        if (isPlaying != _isPlaying) {
+//          setState(() {
+//            _isPlaying = isPlaying;
+//          });
+//        }
+//      })
+//      // 在初始化完成后必须更新界面
+//      ..initialize().then((_) {
+//        setState(() {
+//          _controller.play();
+//        });
+//      });
+//
+//    _controller.setLooping(true);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+//    _controller.dispose();
   }
 
   void showAccountInfoPage() {
-    Navigator.of(_context, rootNavigator: true)
+    Navigator
+        .of(_context, rootNavigator: true)
         .push(MaterialPageRoute(builder: (context) => new AccountInfoPage()));
   }
 
@@ -122,13 +130,15 @@ class AppStoreTodayState extends State<AppStoreToday> {
     var model =
         new AppTodayDetailModel(smallTitle, normalTitle, picName, items);
 
-    Navigator.of(
-      _context,
-      rootNavigator: true,
-    ).push(new CupertinoPageRoute(
-        builder: (_context) => new AppStoreTodayDetails(
-              model: model,
-            )));
+    Navigator
+        .of(
+          _context,
+          rootNavigator: true,
+        )
+        .push(new CupertinoPageRoute(
+            builder: (_context) => new AppStoreTodayDetails(
+                  model: model,
+                )));
   }
 
   Widget _buildTitle() {
@@ -322,7 +332,7 @@ class AppStoreTodayState extends State<AppStoreToday> {
         toItemDetail(smallTitle, normalTitle, picName, normalTitle);
       },
       child: new Container(
-        height: isVideo ? 400.0 : 500.0,
+        height: isVideo ? 350.0 : 500.0,
         child: new Card(
           shape: _buildItemShape(),
           child: new Column(
@@ -330,22 +340,7 @@ class AppStoreTodayState extends State<AppStoreToday> {
             children: <Widget>[
               new Expanded(
                   child: isVideo
-                      ? _controller.value.initialized
-                          // 加载成功
-                          ? new Container(
-                              decoration: new BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: const Radius.circular(16.0),
-                                    topRight: const Radius.circular(16.0)),
-                                image: new DecorationImage(
-                                    image: AssetImage('images/${picName}'),
-                                    fit: BoxFit.cover),
-                              ),
-//                              child: new VideoPlayer(_controller),
-                            )
-                          : new Center(
-                              child: const CircularProgressIndicator(),
-                            )
+                      ? new VideoPlayerLoading(url)
                       : new Container(
                           decoration: new BoxDecoration(
                             borderRadius: BorderRadius.only(
@@ -379,13 +374,6 @@ class AppStoreTodayState extends State<AppStoreToday> {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    //更改状态栏颜色
-//    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-//      statusBarColor: Colors.white,
-//    ));
-    // 隐藏状态栏
-//    SystemChrome.setEnabledSystemUIOverlays([]);
-
     return new Scaffold(
       backgroundColor: Colors.grey[100],
       body: new Padding(
@@ -414,6 +402,60 @@ class AppStoreTodayState extends State<AppStoreToday> {
         ),
       ),
     );
+  }
+}
+
+class VideoPlayerLoading extends StatefulWidget {
+  final String url;
+
+  const VideoPlayerLoading(this.url);
+
+  @override
+  State<StatefulWidget> createState() => new VideoPlayerLoadingState();
+}
+
+class VideoPlayerLoadingState extends State<VideoPlayerLoading> {
+//  bool _initialized;
+  VideoPlayerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = new VideoPlayerController.asset('videos/butterfly.mp4');
+//    _initialized = widget.controller.value.initialized;
+//    widget.controller.addListener(() {
+//      if (!mounted) {
+//        return;
+//      }
+//      final bool controllerInitialized = widget.controller.value.initialized;
+//      if (_initialized != controllerInitialized) {
+//        setState(() {
+//          _initialized = controllerInitialized;
+//          widget.controller.setLooping(true);
+//          widget.controller.play();
+//        });
+//      }
+//    });
+    controller.setLooping(true);
+//    controller.addListener(() {});
+    controller.initialize().then((_) {
+      setState(() {
+        controller.play();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return controller.value.initialized
+        ? new VideoPlayer(controller)
+        : const Center(child: const CircularProgressIndicator());
   }
 }
 
@@ -509,6 +551,7 @@ class AppStoreTodayDetails extends StatelessWidget {
   Widget _buildExitButton(BuildContext _context) {
     return new GestureDetector(
       onTap: () {
+//        SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top,SystemUiOverlay.bottom]);
         Navigator.pop(_context);
       },
       child: new Container(
@@ -527,14 +570,20 @@ class AppStoreTodayDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 隐藏状态栏
+//    SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
-      body: new Stack(
-        alignment: Alignment(0.9, -0.9),
-        children: <Widget>[
-          _buildItemDetailPage(model),
-          _buildExitButton(context)
-        ],
+      appBar: CupertinoNavigationBar(
+        middle: const Text('detail'),
       ),
+//      body: new Stack(
+//        alignment: Alignment(0.9, -0.9),
+//        children: <Widget>[
+//          _buildItemDetailPage(model),
+//          _buildExitButton(context)
+//        ],
+//      ),
+      body: _buildItemDetailPage(model),
     );
   }
 }

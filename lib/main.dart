@@ -4,7 +4,10 @@ import 'package:flutter_app/demo/appstore/app_store_main.dart';
 
 void main() {
   runApp(MaterialApp(
-    theme: ThemeData(primaryColor: Colors.red, primaryColorDark: Colors.red),
+    theme: ThemeData(
+        primaryColor: Colors.grey[100],
+        primaryColorDark: Colors.grey[100],
+        backgroundColor: Colors.grey[100]),
     title: 'Fluter',
     home: new AppStoreMain(),
   ));
