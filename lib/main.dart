@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app/demo/appstore/app_store_main.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+      new SystemUiOverlayStyle(statusBarColor: Colors.grey[100],statusBarBrightness: Brightness.dark,statusBarIconBrightness: Brightness.dark,systemNavigationBarIconBrightness: Brightness.dark));
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(

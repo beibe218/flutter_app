@@ -25,8 +25,8 @@ class AppStoreMain extends StatelessWidget {
 //        statusBarBrightness: Brightness.dark,
 //        statusBarIconBrightness: Brightness.dark));
 //    if (Platform.isAndroid) {
-      SystemChrome.setSystemUIOverlayStyle(
-          new SystemUiOverlayStyle(statusBarColor: Colors.grey[100],statusBarBrightness: Brightness.dark,statusBarIconBrightness: Brightness.dark,systemNavigationBarIconBrightness: Brightness.dark));
+//      SystemChrome.setSystemUIOverlayStyle(
+//          new SystemUiOverlayStyle(statusBarColor: Colors.grey[100],statusBarBrightness: Brightness.dark,statusBarIconBrightness: Brightness.dark,systemNavigationBarIconBrightness: Brightness.dark));
 //    } else if (Platform.isIOS) {
 //      SystemChrome.setSystemUIOverlayStyle(
 //          new SystemUiOverlayStyle(statusBarColor: Colors.white));
