@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app/demo/appstore/app_store_main.dart';
 import 'package:flutter_app/demo/appstore/style.dart';
 
-
 void main() {
   runApp(MaterialApp(
+    theme: new ThemeData(
+        primaryColor: Style.statusBarColor,
+    ),
     debugShowCheckedModeBanner: false,
     title: 'Fluter',
     home: new AppStoreMain(),
@@ -14,5 +16,6 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(new SystemUiOverlayStyle(
       statusBarColor: Style.statusBarColor,
       statusBarBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark));
+      statusBarIconBrightness: Brightness.dark)
+  );
 }

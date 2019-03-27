@@ -642,10 +642,8 @@ class AccountInfoPage extends StatelessWidget {
     return new Scaffold(
       backgroundColor: Colors.grey[150],
       appBar: new CupertinoNavigationBar(
-        actionsForegroundColor: Style.actionbarContentColor,
         middle: const Text(
           '账户',
-          style: const TextStyle(color: Style.actionbarContentColor),
         ),
         backgroundColor: Style.actionbarColor,
       ),
