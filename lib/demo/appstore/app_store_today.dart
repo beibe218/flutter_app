@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,8 +36,7 @@ class AppStoreTodayState extends State<AppStoreToday> {
       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4';
 
   void showAccountInfoPage() {
-    Navigator
-        .of(_context, rootNavigator: true)
+    Navigator.of(_context, rootNavigator: true)
         .push(MaterialPageRoute(builder: (context) => new AccountInfoPage()));
   }
 
@@ -93,15 +94,13 @@ class AppStoreTodayState extends State<AppStoreToday> {
     var model =
         new AppTodayDetailModel(smallTitle, normalTitle, picName, items);
 
-    Navigator
-        .of(
-          _context,
-          rootNavigator: true,
-        )
-        .push(new CupertinoPageRoute(
-            builder: (_context) => new AppStoreTodayDetails(
-                  model: model,
-                )));
+    Navigator.of(
+      _context,
+      rootNavigator: true,
+    ).push(new CupertinoPageRoute(
+        builder: (_context) => new AppStoreTodayDetails(
+              model: model,
+            )));
   }
 
   Widget _buildTitle() {
@@ -337,9 +336,17 @@ class AppStoreTodayState extends State<AppStoreToday> {
   @override
   Widget build(BuildContext context) {
     _context = context;
+
+    if (Platform.isIOS) {
+      SystemChrome.setSystemUIOverlayStyle(new SystemUiOverlayStyle(
+          statusBarColor: Colors.blue,
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark));
+    }
+
     return new Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: new Padding(
+      body: new Container(
+        color: Colors.grey[100],
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: new ListView(
           children: <Widget>[
