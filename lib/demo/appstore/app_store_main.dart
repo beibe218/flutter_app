@@ -1,25 +1,17 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/demo/appstore/app_store_demo.dart';
 import 'package:flutter_app/demo/appstore/app_store_search.dart';
 import 'package:flutter_app/demo/appstore/app_store_today.dart';
-import 'package:flutter_app/demo/list_demo.dart';
-import 'package:flutter_native_log/flutter_native_log.dart';
 
 int lastIndex = 0;
 
 class AppStoreMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    FlutterNativeLog flutterNativeLog = new FlutterNativeLog();
-
-// set production or debug default to debug
-    flutterNativeLog.setIsProduction(isProduction: true);
 //    SystemChrome.setSystemUIOverlayStyle(new SystemUiOverlayStyle(
 //        statusBarColor: const Color(0xCCF8F8F8),
 //        statusBarBrightness: Brightness.dark,
@@ -56,8 +48,6 @@ class AppStoreMain extends StatelessWidget {
                 title: const Text('搜素'))
           ]),
           tabBuilder: (BuildContext context, int index) {
-            flutterNativeLog.e(tag: 'tabclick', msg: 'index=$index');
-
             return new CupertinoTabView(
               builder: (BuildContext context) {
                 switch (index) {
