@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/demo/appstore/app_store_demo.dart';
 import 'package:flutter_app/demo/appstore/app_store_search.dart';
@@ -22,13 +24,13 @@ class AppStoreMain extends StatelessWidget {
 //        statusBarColor: Colors.grey[100],
 //        statusBarBrightness: Brightness.dark,
 //        statusBarIconBrightness: Brightness.dark));
-//    if (Platform.isAndroid) {
+    if (Platform.isAndroid) {
+      SystemChrome.setSystemUIOverlayStyle(
+          new SystemUiOverlayStyle(statusBarColor: Colors.grey[100],statusBarBrightness: Brightness.dark,statusBarIconBrightness: Brightness.dark,systemNavigationBarIconBrightness: Brightness.dark));
+    } else if (Platform.isIOS) {
 //      SystemChrome.setSystemUIOverlayStyle(
 //          new SystemUiOverlayStyle(statusBarColor: Colors.white));
-//    } else if (Platform.isIOS) {
-//      SystemChrome.setSystemUIOverlayStyle(
-//          new SystemUiOverlayStyle(statusBarColor: Colors.white));
-//    }
+    }
 
     return WillPopScope(
         child: new CupertinoTabScaffold(

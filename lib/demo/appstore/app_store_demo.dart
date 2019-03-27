@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_app/demo/appstore/app_detail_demo.dart';
 import 'package:flutter_app/demo/appstore/app_model.dart';
 
@@ -14,6 +13,7 @@ class AppStoreDemo extends StatelessWidget {
     return new Scaffold(
       appBar: const CupertinoNavigationBar(
         middle: const Text('AppSotre'),
+        backgroundColor: Colors.grey[100],
       ),
       body: new ListView(
         children: <Widget>[

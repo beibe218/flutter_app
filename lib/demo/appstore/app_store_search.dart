@@ -62,7 +62,7 @@ class AppStoreSearch extends StatefulWidget {
 class AppStoreSearchState extends State<AppStoreSearch> {
   Widget _buildSearchTextField() {
     return new Container(
-      margin: EdgeInsets.only(left: 18.0, right: 18.0, top: 18.0, bottom: 30.0),
+      margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 30.0),
       padding: EdgeInsets.all(10.0),
       decoration: new BoxDecoration(
           color: Colors.grey[200],
@@ -92,11 +92,11 @@ class AppStoreSearchState extends State<AppStoreSearch> {
 
   Widget _buildHotSearchItem(String text, Color color, bool lastItem) {
     Widget row = new Container(
-      margin: EdgeInsets.only(left: 18.0, right: 18.0),
+      margin: EdgeInsets.only(left: 16.0, right: 16.0),
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: new Text(
         text,
-        style: new TextStyle(fontSize: 18.0, color: color),
+        style: new TextStyle(fontSize: 16.0, color: color),
       ),
     );
 
@@ -108,20 +108,23 @@ class AppStoreSearchState extends State<AppStoreSearch> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         row,
-        new Container(
-          margin: EdgeInsets.only(left: 18.0, right: 18.0),
-          height: 1.0,
-          color: const Color(0xFFD9D9D9),
+        Container(
+          margin: EdgeInsets.only(left: 16.0, right: 16.0),
+          child: new Divider(
+            height: 1.0,
+          ),
         )
       ],
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CupertinoNavigationBar(
         middle: const Text('搜索'),
+        backgroundColor: Colors.grey[100],
       ),
       body: new ListView.builder(
         itemBuilder: (BuildContext context, int index) {

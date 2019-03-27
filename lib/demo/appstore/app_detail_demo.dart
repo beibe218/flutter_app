@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_app/demo/appstore/app_model.dart';
 
 class AppDetailDemo extends StatelessWidget {
@@ -13,6 +12,7 @@ class AppDetailDemo extends StatelessWidget {
     return Scaffold(
       appBar: new CupertinoNavigationBar(
         middle: new Text(appModel.title),
+        backgroundColor: Colors.grey[100],
 //        trailing: const ExitButton(),
       ),
       body: new ListView(

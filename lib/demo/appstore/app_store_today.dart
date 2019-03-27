@@ -505,7 +505,7 @@ class AppStoreTodayDetails extends StatelessWidget {
       padding: EdgeInsets.all(16.0),
       child: new Text(
         contentText,
-        style: new TextStyle(fontSize: 20.0, color: Colors.grey, height: 1.5),
+        style: new TextStyle(fontSize: 20.0, color: Colors.grey, height: 1.3),
       ),
     );
   }
@@ -575,6 +575,7 @@ class AppStoreTodayDetails extends StatelessWidget {
     return Scaffold(
       appBar: CupertinoNavigationBar(
         middle: const Text('detail'),
+        backgroundColor: Colors.grey[100],
       ),
 //      body: new Stack(
 //        alignment: Alignment(0.9, -0.9),
@@ -671,6 +672,7 @@ class AccountInfoPage extends StatelessWidget {
       backgroundColor: Colors.grey[150],
       appBar: new CupertinoNavigationBar(
         middle: const Text('账户'),
+        backgroundColor: Colors.grey[100],
       ),
       body: new ListView(
         children: <Widget>[
