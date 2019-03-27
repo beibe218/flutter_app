@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/demo/appstore/model/app_today_detail_model.dart';
+import 'package:flutter_app/demo/appstore/style.dart';
+import 'package:flutter_app/main.dart';
 import 'package:video_player/video_player.dart';
 
 Padding _buildPaddingTop8() {
@@ -28,47 +30,8 @@ class AppStoreToday extends StatefulWidget {
 
 class AppStoreTodayState extends State<AppStoreToday> {
   BuildContext _context;
-
-//  VideoPlayerController _controller;
-
-//  bool _isPlaying = false;
-
   String url =
       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4';
-
-  @override
-  void initState() {
-    super.initState();
-    SystemChrome.setSystemUIOverlayStyle(new SystemUiOverlayStyle(
-        statusBarColor: Colors.grey[100],
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.dark));
-//    _controller = VideoPlayerController.asset('videos/butterfly.mp4');
-//    _controller = VideoPlayerController.network(url)
-    // 播放状态
-//      ..addListener(() {
-//        final bool isPlaying = _controller.value.isPlaying;
-//        if (isPlaying != _isPlaying) {
-//          setState(() {
-//            _isPlaying = isPlaying;
-//          });
-//        }
-//      })
-//      // 在初始化完成后必须更新界面
-//      ..initialize().then((_) {
-//        setState(() {
-//          _controller.play();
-//        });
-//      });
-//
-//    _controller.setLooping(true);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-//    _controller.dispose();
-  }
 
   void showAccountInfoPage() {
     Navigator
@@ -672,7 +635,7 @@ class AccountInfoPage extends StatelessWidget {
       backgroundColor: Colors.grey[150],
       appBar: new CupertinoNavigationBar(
         middle: const Text('账户'),
-        backgroundColor: Colors.grey[100],
+        backgroundColor: Style.actionbarColor,
       ),
       body: new ListView(
         children: <Widget>[

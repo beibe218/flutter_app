@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/demo/appstore/style.dart';
 
 const List<String> hotSearchNames = const <String>[
   '热门搜索',
@@ -124,7 +125,7 @@ class AppStoreSearchState extends State<AppStoreSearch> {
     return Scaffold(
       appBar: CupertinoNavigationBar(
         middle: const Text('搜索'),
-        backgroundColor: Colors.grey[100],
+        backgroundColor: Style.actionbarColor,
       ),
       body: new ListView.builder(
         itemBuilder: (BuildContext context, int index) {
