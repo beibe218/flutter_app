@@ -338,14 +338,14 @@ class AppStoreTodayState extends State<AppStoreToday> {
     _context = context;
 
     return new Scaffold(
-      appBar: new CupertinoNavigationBar(
-        backgroundColor: Style.actionbarColor,
-        actionsForegroundColor: Style.actionbarContentColor,
-        middle: const Text(
-          'Toaday',
-          style: const TextStyle(color: Style.actionbarContentColor),
-        ),
-      ),
+//      appBar: new CupertinoNavigationBar(
+//        backgroundColor: Style.actionbarColor,
+//        actionsForegroundColor: Style.actionbarContentColor,
+//        middle: const Text(
+//          'Toaday',
+//          style: const TextStyle(color: Style.actionbarContentColor),
+//        ),
+//      ),
       body: new Container(
         color: Colors.grey[100],
         padding: EdgeInsets.symmetric(horizontal: 16.0),
