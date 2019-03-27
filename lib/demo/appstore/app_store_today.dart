@@ -337,14 +337,15 @@ class AppStoreTodayState extends State<AppStoreToday> {
   Widget build(BuildContext context) {
     _context = context;
 
-    if (Platform.isIOS) {
-      SystemChrome.setSystemUIOverlayStyle(new SystemUiOverlayStyle(
-          statusBarColor: Colors.blue,
-          statusBarBrightness: Brightness.dark,
-          statusBarIconBrightness: Brightness.dark));
-    }
-
     return new Scaffold(
+      appBar: new CupertinoNavigationBar(
+        backgroundColor: Style.actionbarColor,
+        actionsForegroundColor: Style.actionbarContentColor,
+        middle: const Text(
+          'Toaday',
+          style: const TextStyle(color: Style.actionbarContentColor),
+        ),
+      ),
       body: new Container(
         color: Colors.grey[100],
         padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -641,7 +642,11 @@ class AccountInfoPage extends StatelessWidget {
     return new Scaffold(
       backgroundColor: Colors.grey[150],
       appBar: new CupertinoNavigationBar(
-        middle: const Text('账户'),
+        actionsForegroundColor: Style.actionbarContentColor,
+        middle: const Text(
+          '账户',
+          style: const TextStyle(color: Style.actionbarContentColor),
+        ),
         backgroundColor: Style.actionbarColor,
       ),
       body: new ListView(
