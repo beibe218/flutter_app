@@ -7,6 +7,9 @@ void main() {
   runApp(MaterialApp(
     theme: new ThemeData(
         primaryColor: Style.statusBarColor,
+        primaryColorDark: Style.statusBarColor,
+        primaryColorLight: Style.statusBarColor,
+        primaryColorBrightness: Brightness.dark,
     ),
     debugShowCheckedModeBanner: false,
     title: 'Fluter',
@@ -16,6 +19,5 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(new SystemUiOverlayStyle(
       statusBarColor: Style.statusBarColor,
       statusBarBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark)
-  );
+      statusBarIconBrightness: Brightness.dark));
 }
