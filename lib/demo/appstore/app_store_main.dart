@@ -54,7 +54,7 @@ class AppStoreMain extends StatelessWidget {
               builder: (BuildContext context) {
                 switch (index) {
                   case 0:
-                    return new AppStoreToday();
+                    return new AppToday();
                     break;
                   case 1:
                     return new AppStoreDemo();

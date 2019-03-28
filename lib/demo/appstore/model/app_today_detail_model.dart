@@ -1,11 +1,14 @@
+import 'package:flutter_app/demo/appstore/app_store_today.dart';
+
 class AppTodayDetailModel{
   final String smallTitle;
   final String normalTitle;
   final String picName;
   final List<DetailItem> detailItems;
+  final AppInfo appInfo;
 
   AppTodayDetailModel(this.smallTitle, this.normalTitle, this.picName,
-      this.detailItems);
+      this.detailItems,this.appInfo);
 }
 
 class DetailItem{
