@@ -5,12 +5,12 @@ import 'package:flutter_app/demo/appstore/style.dart';
 
 void main() {
   runApp(MaterialApp(
-    theme: new ThemeData(
-        primaryColor: Style.statusBarColor,
-        primaryColorDark: Style.statusBarColor,
-        primaryColorLight: Style.statusBarColor,
-        primaryColorBrightness: Brightness.dark,
-    ),
+//    theme: new ThemeData(
+//        primaryColor: Style.statusBarColor,
+//        primaryColorDark: Style.statusBarColor,
+//        primaryColorLight: Style.statusBarColor,
+//        primaryColorBrightness: Brightness.dark,
+//    ),
     debugShowCheckedModeBanner: false,
     title: 'Fluter',
     home: new AppStoreMain(),

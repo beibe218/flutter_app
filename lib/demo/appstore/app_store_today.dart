@@ -112,7 +112,7 @@ class AppStoreTodayState extends State<AppStoreToday> {
           children: <Widget>[
             _buildSmallTitle('3月5日 星期二', Colors.grey),
             const Padding(padding: EdgeInsets.only(top: 5.0)),
-            _buildNormalTitle('Today', Colors.black),
+            _buildNormalTitle('今日推荐', Colors.black),
           ],
         ),
         new GestureDetector(
@@ -338,14 +338,12 @@ class AppStoreTodayState extends State<AppStoreToday> {
     _context = context;
 
     return new Scaffold(
-//      appBar: new CupertinoNavigationBar(
-//        backgroundColor: Style.actionbarColor,
-//        actionsForegroundColor: Style.actionbarContentColor,
-//        middle: const Text(
-//          'Toaday',
-//          style: const TextStyle(color: Style.actionbarContentColor),
-//        ),
-//      ),
+      appBar: new CupertinoNavigationBar(
+        backgroundColor: Style.actionbarColor,
+        middle: const Text(
+          'Toaday',
+        ),
+      ),
       body: new Container(
         color: Colors.grey[100],
         padding: EdgeInsets.symmetric(horizontal: 16.0),
