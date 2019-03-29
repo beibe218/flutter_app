@@ -7,7 +7,6 @@ import 'package:flutter_app/demo/appstore/app_detail_demo.dart';
 import 'package:flutter_app/demo/appstore/app_model.dart';
 import 'package:flutter_app/demo/appstore/model/app_today_detail_model.dart';
 import 'package:flutter_app/demo/appstore/style.dart';
-import 'package:flutter_app/main.dart';
 import 'package:video_player/video_player.dart';
 
 Padding _buildPaddingTop8() {
@@ -72,19 +71,28 @@ Widget _buildAppDescText(String appDesc) {
   );
 }
 
-Widget _buildAppGetButton(String text) {
+Widget _buildAppGetButtonBlue(String text) {
+  return _buildAppGetButton(text, Colors.white, Colors.blueAccent);
+}
+
+Widget _buildAppGetButtonGrey(String text) {
+  return _buildAppGetButton(
+      text, Colors.blueAccent, CupertinoColors.lightBackgroundGray);
+}
+
+Widget _buildAppGetButton(String text, Color textColor, Color btnColor) {
   return CupertinoButton(
     child: new Text(
       text,
       style: TextStyle(
-        color: Colors.blueAccent,
+        color: textColor,
         fontSize: 14.0,
         fontWeight: FontWeight.w700,
         letterSpacing: -0.28,
       ),
     ),
     onPressed: () {},
-    color: CupertinoColors.lightBackgroundGray,
+    color: btnColor,
     padding: EdgeInsets.symmetric(horizontal: 24.0),
     borderRadius: new BorderRadius.circular(32.0),
     minSize: 32.0,
@@ -273,7 +281,7 @@ class AppStoreTodayDetails extends StatelessWidget {
             style: new TextStyle(color: Colors.grey, fontSize: 14.0),
           ),
           _buildPaddingTop8(),
-          _buildAppGetButton('获取'),
+          _buildAppGetButtonBlue('获取'),
           new Padding(padding: EdgeInsets.only(top: 5.0)),
           _buildAppGetHintText()
         ],
@@ -505,7 +513,7 @@ class AppTodayState extends State<AppToday> {
     var item6 = new AppTodayItem(ViewType.type_3, 'pic_today_2.jpg', '电子竞技',
         Colors.white, '', '我的世界为什么\n好玩？', Colors.white, [app4]);
 
-    var item7 = new AppTodayItem(ViewType.type_5, 'pic_today_4.png', '游戏美学',
+    var item7 = new AppTodayItem(ViewType.type_5, 'pic_momo_5.png', '游戏美学',
         Colors.grey, '', '荒原上的昼与夜', Colors.black, [app2]);
 
     todayItems = <AppTodayItem>[
@@ -792,7 +800,7 @@ class AppTodayState extends State<AppToday> {
             ),
             new Column(
               children: <Widget>[
-                _buildAppGetButton('获取'),
+                _buildAppGetButtonGrey('获取'),
                 new Padding(padding: EdgeInsets.only(top: 5.0)),
                 _buildAppGetHintText()
               ],
@@ -835,7 +843,7 @@ class AppTodayState extends State<AppToday> {
                     ),
                     new Column(
                       children: <Widget>[
-                        _buildAppGetButton('获取'),
+                        _buildAppGetButtonGrey('￥6.00'),
                         new Padding(padding: EdgeInsets.only(top: 5.0)),
                         _buildAppGetHintText()
                       ],
