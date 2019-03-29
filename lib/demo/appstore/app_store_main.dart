@@ -8,28 +8,28 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app/demo/appstore/app_store_demo.dart';
 import 'package:flutter_app/demo/appstore/app_store_search.dart';
 import 'package:flutter_app/demo/appstore/app_store_today.dart';
+import 'package:flutter_app/demo/list_demo.dart';
 
 int lastIndex = 0;
 
 class AppStoreMain extends StatelessWidget {
+
+  static const routeName = '/app_store_main';
+
   @override
   Widget build(BuildContext context) {
 //    SystemChrome.setSystemUIOverlayStyle(new SystemUiOverlayStyle(
 //        statusBarColor: const Color(0xCCF8F8F8),
 //        statusBarBrightness: Brightness.dark,
 //        statusBarIconBrightness: Brightness.dark));
-
-//    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
-//    SystemChrome.setSystemUIOverlayStyle(new SystemUiOverlayStyle(
-//        statusBarColor: Colors.grey[100],
-//        statusBarBrightness: Brightness.dark,
-//        statusBarIconBrightness: Brightness.dark));
+      //隐藏状态栏和导航栏
+//    SystemChrome.setEnabledSystemUIOverlays([]);
+      //显示状态栏和导航栏
+//    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
 //    if (Platform.isAndroid) {
-//      SystemChrome.setSystemUIOverlayStyle(
-//          new SystemUiOverlayStyle(statusBarColor: Colors.grey[100],statusBarBrightness: Brightness.dark,statusBarIconBrightness: Brightness.dark,systemNavigationBarIconBrightness: Brightness.dark));
+
 //    } else if (Platform.isIOS) {
-//      SystemChrome.setSystemUIOverlayStyle(
-//          new SystemUiOverlayStyle(statusBarColor: Colors.white));
+
 //    }
 
     return WillPopScope(
@@ -60,6 +60,7 @@ class AppStoreMain extends StatelessWidget {
                     return new AppStoreDemo();
                     break;
                   case 2:
+//                    return new ListDemo();
                     break;
                   case 3:
                     return new AppStoreSearch();

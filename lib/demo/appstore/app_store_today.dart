@@ -27,6 +27,80 @@ Widget _buildNormalTitle(String text, Color color) {
           fontSize: 28.0, color: color, fontWeight: FontWeight.w700));
 }
 
+Widget _buildDivider(double paddingLeft) {
+  return Container(
+    color: Colors.white,
+    padding: EdgeInsets.only(left: paddingLeft),
+    child: new Divider(
+      color: Colors.grey[250],
+      height: 1.0,
+    ),
+  );
+}
+
+Widget _buildAppIconOverload(String appIcon, double size, double radius) {
+  return new Container(
+    width: size,
+    height: size,
+    decoration: new BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('images/${appIcon}'), fit: BoxFit.cover),
+        borderRadius: BorderRadius.all(Radius.circular(radius)),
+        border:
+            Border.all(color: CupertinoColors.lightBackgroundGray, width: 1.0)),
+  );
+}
+
+Widget _buildAppIcon(String appIcon, double size) {
+  return _buildAppIconOverload(appIcon, size, 16.0);
+}
+
+Widget _buildAppNameText(String appName) {
+  return new Text(
+    appName,
+    style: TextStyle(
+      fontSize: 16.0,
+      color: CupertinoColors.black,
+    ),
+  );
+}
+
+Widget _buildAppDescText(String appDesc) {
+  return new Text(
+    appDesc,
+    style: TextStyle(fontSize: 13.0, color: Colors.grey),
+  );
+}
+
+Widget _buildAppGetButton(String text) {
+  return CupertinoButton(
+    child: new Text(
+      text,
+      style: TextStyle(
+        color: Colors.blueAccent,
+        fontSize: 14.0,
+        fontWeight: FontWeight.w700,
+        letterSpacing: -0.28,
+      ),
+    ),
+    onPressed: () {},
+    color: CupertinoColors.lightBackgroundGray,
+    padding: EdgeInsets.symmetric(horizontal: 24.0),
+    borderRadius: new BorderRadius.circular(32.0),
+    minSize: 32.0,
+  );
+}
+
+Widget _buildAppGetHintText() {
+  return new Text(
+    'App内购买项目',
+    style: TextStyle(
+      color: Colors.grey,
+      fontSize: 10.0,
+    ),
+  );
+}
+
 class VideoPlayerLoading extends StatefulWidget {
   final String url;
 
@@ -187,16 +261,7 @@ class AppStoreTodayDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          new Container(
-              height: 80.0,
-              width: 80.0,
-              decoration: new BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('images/${model.appInfo.appIcon}'),
-                      fit: BoxFit.cover),
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                  border: Border.all(
-                      color: CupertinoColors.lightBackgroundGray, width: 1.0))),
+          _buildAppIcon(model.appInfo.appIcon, 80.0),
           _buildPaddingTop8(),
           new Text(
             model.appInfo.appName,
@@ -208,30 +273,9 @@ class AppStoreTodayDetails extends StatelessWidget {
             style: new TextStyle(color: Colors.grey, fontSize: 14.0),
           ),
           _buildPaddingTop8(),
-          CupertinoButton(
-            child: new Text(
-              '获取',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14.0,
-                fontWeight: FontWeight.w700,
-                letterSpacing: -0.28,
-              ),
-            ),
-            onPressed: () {},
-            color: Colors.blueAccent,
-            padding: EdgeInsets.symmetric(horizontal: 24.0),
-            borderRadius: new BorderRadius.circular(32.0),
-            minSize: 32.0,
-          ),
+          _buildAppGetButton('获取'),
           new Padding(padding: EdgeInsets.only(top: 5.0)),
-          new Text(
-            'App内购买项目',
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 10.0,
-            ),
-          )
+          _buildAppGetHintText()
         ],
       ),
     );
@@ -354,17 +398,6 @@ class AccountInfoPage extends StatelessWidget {
     return new Padding(padding: EdgeInsets.only(top: 25.0));
   }
 
-  Widget _buildDivider(double paddingLeft) {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.only(left: paddingLeft),
-      child: new Divider(
-        color: Colors.grey[250],
-        height: 1.0,
-      ),
-    );
-  }
-
   Widget _buildCommonText(String text, Color color, bool offstageRightChevron) {
     return new Container(
       color: Colors.white,
@@ -439,7 +472,14 @@ class AppTodayState extends State<AppToday> {
   AppInfo app7 = new AppInfo('ic_wangyimusic.png', '网易云音乐', '音乐的力量');
   AppInfo app8 = new AppInfo('ic_taobao.png', '淘宝', '随时随地，想淘就淘');
 
+  var lastItem = new AppTodayItem(ViewType.type_7, '', '兑换', Colors.blueAccent,
+      '为 Apple ID 充值', '', Colors.blueAccent, []);
+
+  int loadMoreCount = 0;
+  bool isAddLastItem = false;
+
   List<AppTodayItem> todayItems;
+  List<AppTodayItem> todayItemsMoreData;
 
   @override
   void initState() {
@@ -459,13 +499,33 @@ class AppTodayState extends State<AppToday> {
     var item4 = new AppTodayItem(ViewType.type_4, 'pic_today_2.jpg', '电子竞技',
         Colors.grey, '我的世界为什么好玩？', '我的世界', Colors.black, [app3]);
 
-    var item6 = new AppTodayItem(ViewType.type_2, 'lake.jpg', '游戏人生',
+    var item5 = new AppTodayItem(ViewType.type_2, 'lake.jpg', '游戏人生',
         Colors.grey, '', '偶尔耍点坏', Colors.black, appInfo2);
 
-    var item5 = new AppTodayItem(ViewType.type_3, 'pic_today_2.jpg', '电子竞技',
+    var item6 = new AppTodayItem(ViewType.type_3, 'pic_today_2.jpg', '电子竞技',
         Colors.white, '', '我的世界为什么\n好玩？', Colors.white, [app4]);
 
-    todayItems = <AppTodayItem>[item1, item2, item3, item4, item5, item6];
+    var item7 = new AppTodayItem(ViewType.type_5, 'pic_today_4.png', '游戏美学',
+        Colors.grey, '', '荒原上的昼与夜', Colors.black, [app2]);
+
+    todayItems = <AppTodayItem>[
+      item1,
+      item2,
+      item3,
+      item4,
+      item5,
+      item6,
+    ];
+
+    todayItemsMoreData = <AppTodayItem>[
+      item2,
+      item1,
+      item4,
+      item3,
+      item6,
+      item5,
+      item7
+    ];
   }
 
   ShapeBorder _buildItemShape() {
@@ -723,56 +783,122 @@ class AppTodayState extends State<AppToday> {
                 child: new Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    new Text(
-                      appName,
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: CupertinoColors.black,
-                      ),
-                    ),
-                    new Container(
-                      margin: EdgeInsets.only(top: 5.0),
-                      child: new Text(
-                        appDesc,
-                        style: TextStyle(fontSize: 13.0, color: Colors.grey),
-                      ),
-                    )
+                    _buildAppNameText(appName),
+                    const Padding(padding: EdgeInsets.only(top: 5.0)),
+                    _buildAppDescText(appDesc)
                   ],
                 ),
               ),
             ),
             new Column(
               children: <Widget>[
-                CupertinoButton(
-                  child: new Text(
-                    '获取',
-                    style: TextStyle(
-                      color: Colors.blueAccent,
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: -0.28,
-                    ),
-                  ),
-                  onPressed: () {},
-                  color: CupertinoColors.lightBackgroundGray,
-                  padding: EdgeInsets.symmetric(horizontal: 24.0),
-                  borderRadius: new BorderRadius.circular(32.0),
-                  minSize: 32.0,
-                ),
-                new Container(
-                  margin: EdgeInsets.only(top: 5.0),
-                  child: new Text(
-                    'App内购买项目',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 10.0,
-                    ),
-                  ),
-                )
+                _buildAppGetButton('获取'),
+                new Padding(padding: EdgeInsets.only(top: 5.0)),
+                _buildAppGetHintText()
               ],
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildItem4(AppTodayItem item) {
+    return new Container(
+        height: 400.0,
+        child: new Card(
+          shape: _buildItemShape(),
+          child: new Container(
+            padding: EdgeInsets.all(16.0),
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _buildSmallTitle(item.subTitle, item.subTitleColor),
+                new Padding(padding: EdgeInsets.only(top: 8.0)),
+                _buildNormalTitle(item.title, item.titleColor),
+                new Expanded(
+                  child: new Center(
+                    child: _buildAppIconOverload(
+                        item.apps[0].appIcon, 180.0, 52.0),
+                  ),
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        _buildAppNameText(item.apps[0].appName),
+                        new Padding(padding: EdgeInsets.only(top: 5.0)),
+                        _buildAppDescText(item.apps[0].appDesc),
+                      ],
+                    ),
+                    new Column(
+                      children: <Widget>[
+                        _buildAppGetButton('获取'),
+                        new Padding(padding: EdgeInsets.only(top: 5.0)),
+                        _buildAppGetHintText()
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        ));
+  }
+
+  Widget _buildFootRow(AppTodayItem item) {
+    return new Container(
+      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+      child: new Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          _buildFootButton(item.subTitleColor, item.subTitle),
+          _buildPaddingTop8(),
+          _buildFootButton(item.subTitleColor, item.subTitle2),
+          _buildPaddingTop8(),
+          _buildPaddingTop8(),
+          new Divider(
+            height: 1.0,
+            color: Colors.grey[300],
+          ),
+          new Container(
+            padding: EdgeInsets.symmetric(vertical: 14.0),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  '条款与条件',
+                  style: const TextStyle(color: Colors.grey, fontSize: 14.0),
+                ),
+                const Padding(padding: EdgeInsets.only(left: 5.0)),
+                const Icon(
+                  CupertinoIcons.right_chevron,
+                  color: Colors.grey,
+                  size: 18,
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFootButton(Color color, String text) {
+    return new Container(
+      width: 9999.0,
+      child: new CupertinoButton(
+        child: new Text(
+          text,
+          style: new TextStyle(
+              color: color, fontSize: 16.0, fontWeight: FontWeight.w700),
+        ),
+        onPressed: () {},
+        color: Colors.blueGrey[50],
+        padding: EdgeInsets.symmetric(vertical: 12.0),
       ),
     );
   }
@@ -790,12 +916,38 @@ class AppTodayState extends State<AppToday> {
       ),
       body: new ListView.builder(
         itemBuilder: (BuildContext context, int index) {
+          print("listIndex=${index}");
+
+          if (loadMoreCount == 2 && !isAddLastItem) {
+            isAddLastItem = true;
+            Future.delayed(Duration(milliseconds: 200)).then((e) {
+              setState(() {
+                todayItems.add(lastItem);
+              });
+            });
+          }
+
+          if (loadMoreCount < 3 &&
+              !isAddLastItem &&
+              index >= todayItems.length - 1) {
+            loadMoreCount++;
+            Future.delayed(Duration(milliseconds: 200)).then((e) {
+              setState(() {
+                todayItems.addAll(todayItemsMoreData);
+              });
+            });
+          }
+
           if (index == 0) {
             return _buildTitle();
           }
 
           AppTodayItem item = todayItems[index - 1];
           Widget itemView;
+
+          if (item.viewType == ViewType.type_7) {
+            return _buildFootRow(item);
+          }
 
           if (item.viewType == ViewType.type_1) {
             itemView = _buildItem1(item, false);
@@ -805,6 +957,8 @@ class AppTodayState extends State<AppToday> {
             itemView = _buildItem2(item);
           } else if (item.viewType == ViewType.type_4) {
             itemView = _buildItem1(item, false);
+          } else if (item.viewType == ViewType.type_5) {
+            itemView = _buildItem4(item);
           }
 
           return new GestureDetector(
@@ -840,7 +994,7 @@ class AppTodayItem {
       this.subTitle2, this.title, this.titleColor, this.apps);
 }
 
-enum ViewType { type_1, type_2, type_3, type_4 }
+enum ViewType { type_1, type_2, type_3, type_4, type_5, type_6, type_7 }
 
 class AppInfo {
   String appIcon;

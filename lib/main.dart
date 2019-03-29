@@ -5,15 +5,19 @@ import 'package:flutter_app/demo/appstore/style.dart';
 
 void main() {
   runApp(MaterialApp(
-//    theme: new ThemeData(
+    theme: new ThemeData(
 //        primaryColor: Style.statusBarColor,
 //        primaryColorDark: Style.statusBarColor,
 //        primaryColorLight: Style.statusBarColor,
 //        primaryColorBrightness: Brightness.dark,
-//    ),
+//        primarySwatch: Colors.grey
+    ),
     debugShowCheckedModeBanner: false,
     title: 'Fluter',
     home: new AppStoreMain(),
+    routes: <String, WidgetBuilder>{
+      AppStoreMain.routeName: (BuildContext context) => new AppStoreMain()
+    },
   ));
 
   SystemChrome.setSystemUIOverlayStyle(new SystemUiOverlayStyle(
