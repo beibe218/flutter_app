@@ -41,5 +41,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>Status bar is initially hidden</key>
+    <true/>
 </dict>
 </plist>
