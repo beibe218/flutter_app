@@ -45,7 +45,7 @@ Widget _buildAppIconOverload(String appIcon, double size, double radius) {
     height: size,
     decoration: new BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('images/${appIcon}'), fit: BoxFit.cover),
+            image: AssetImage('images/$appIcon'), fit: BoxFit.cover),
         borderRadius: BorderRadius.all(Radius.circular(radius)),
         border:
             Border.all(color: CupertinoColors.lightBackgroundGray, width: 1.0)),
@@ -206,7 +206,7 @@ class AppStoreTodayDetails extends StatelessWidget {
     return new Container(
       height: 300.0,
       child: Image.asset(
-        'images/${content}',
+        'images/$content',
         fit: BoxFit.cover,
       ),
     );
@@ -242,7 +242,7 @@ class AppStoreTodayDetails extends StatelessWidget {
       height: 500.0,
       decoration: new BoxDecoration(
           image: new DecorationImage(
-              image: AssetImage('images/${picName}'), fit: BoxFit.cover)),
+              image: AssetImage('images/$picName'), fit: BoxFit.cover)),
       child: new Padding(
         padding: EdgeInsets.all(16.0),
         child: new Row(
@@ -784,7 +784,7 @@ class AppTodayState extends State<AppToday> {
               height: 60.0,
               decoration: new BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('images/${appIconName}'),
+                      image: AssetImage('images/$appIconName'),
                       fit: BoxFit.cover),
                   borderRadius: BorderRadius.all(Radius.circular(16.0)),
                   border: Border.all(
@@ -929,7 +929,7 @@ class AppTodayState extends State<AppToday> {
       ),
       body: new ListView.builder(
         itemBuilder: (BuildContext context, int index) {
-          print("listIndex=${index}");
+          print("listIndex=$index");
 
           if (loadMoreCount == 2 && !isAddLastItem) {
             isAddLastItem = true;
