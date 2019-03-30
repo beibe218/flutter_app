@@ -7,7 +7,9 @@ import 'package:flutter_app/demo/appstore/app_detail_demo.dart';
 import 'package:flutter_app/demo/appstore/app_model.dart';
 import 'package:flutter_app/demo/appstore/model/app_today_detail_model.dart';
 import 'package:flutter_app/demo/appstore/style.dart';
+import 'package:flutter_app/demo/appstore/utils/date_utils.dart';
 import 'package:video_player/video_player.dart';
+import 'package:date_format/date_format.dart';
 
 Padding _buildPaddingTop8() {
   return const Padding(padding: EdgeInsets.only(top: 8.0));
@@ -599,6 +601,9 @@ class AppTodayState extends State<AppToday> {
   }
 
   Widget _buildTitle() {
+    var monthDay = formatDate(DateTime.now(), [m, '月', d, '日']);
+    var week = formatDate(DateTime.now(), [DD]);
+    var weekChina = weekDD2China(week);
     return new Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: new Row(
@@ -607,7 +612,7 @@ class AppTodayState extends State<AppToday> {
           new Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              _buildSmallTitle('3月5日 星期二', Colors.grey),
+              _buildSmallTitle('$monthDay $weekChina', Colors.grey),
               const Padding(padding: EdgeInsets.only(top: 5.0)),
               _buildNormalTitle('今日推荐', Colors.black),
             ],
