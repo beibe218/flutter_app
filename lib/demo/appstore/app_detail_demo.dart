@@ -189,7 +189,7 @@ Widget _buildScoreFirstLevelText(String text) {
   return new Text(
     text,
     style: TextStyle(
-        color: Colors.grey, fontWeight: FontWeight.w700, fontSize: 28.0),
+        color: Colors.grey, fontWeight: FontWeight.w700, fontSize: 22.0),
   );
 }
 
@@ -199,7 +199,7 @@ Widget _buildScoreSecondaryText(String text) {
 
 Widget _buildAppPictureRow() {
   return new SizedBox(
-    height: 450.0,
+    height: 400.0,
     child: new ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 5,
@@ -211,7 +211,7 @@ Widget _buildAppPictureRow() {
 
 Widget _buildAppPictureItem(int i) {
   return new Container(
-    width: 260.0,
+    width: 240.0,
     margin: i == 4
         ? EdgeInsets.symmetric(horizontal: 16.0)
         : EdgeInsets.only(left: 16.0),

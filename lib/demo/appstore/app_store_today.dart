@@ -291,30 +291,31 @@ class AppStoreTodayDetails extends StatelessWidget {
     );
   }
 
-  Widget _buildShareRow() {
+  Widget _buildShareRow(){
     return new Center(
       child: new Container(
-        width: 120.0,
         margin: EdgeInsets.only(top: 50.0, bottom: 30.0),
-        padding: EdgeInsets.symmetric(vertical: 10.0),
-        decoration: new BoxDecoration(
-            color: Colors.blueGrey[50],
-            borderRadius: BorderRadius.all(
-              Radius.circular(12.0),
-            )),
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Icon(
-              CupertinoIcons.share_up,
-              color: Colors.blueAccent,
-            ),
-            const Padding(padding: EdgeInsets.only(left: 5.0)),
-            const Text(
-              '分享',
-              style: const TextStyle(color: Colors.blueAccent, fontSize: 16.0),
-            )
-          ],
+        width: 120.0,
+        child: new CupertinoButton(
+          child:new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Icon(
+                CupertinoIcons.share_up,
+                color: Colors.blueAccent,
+              ),
+              const Padding(padding: EdgeInsets.only(left: 5.0)),
+              const Text(
+                '分享',
+                style: const TextStyle(color: Colors.blueAccent, fontSize: 16.0),
+              )
+            ],
+          ),
+          onPressed: () {},
+          color: Colors.blueGrey[50],
+          padding: EdgeInsets.symmetric(vertical: 10.0),
+          borderRadius: new BorderRadius.circular(12.0),
+          minSize: 32.0,
         ),
       ),
     );
@@ -347,7 +348,7 @@ class AppStoreTodayDetails extends StatelessWidget {
 //    SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
       appBar: CupertinoNavigationBar(
-        middle: const Text('detail'),
+        middle: new Text(model.appInfo.appName),
         backgroundColor: Colors.grey[100],
       ),
       body: new Stack(
