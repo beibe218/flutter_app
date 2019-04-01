@@ -156,7 +156,7 @@ class AppUpdateItemState extends State<AppUpdateItem> {
                   ),
                 ),
                 color: backgroundColor,
-                padding: EdgeInsets.all(3.0),
+                padding: EdgeInsets.only(left: 3.0),
               ),
             ),
           ],
