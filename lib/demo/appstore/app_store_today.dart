@@ -8,12 +8,11 @@ import 'package:flutter_app/demo/appstore/app_model.dart';
 import 'package:flutter_app/demo/appstore/model/app_today_detail_model.dart';
 import 'package:flutter_app/demo/appstore/style.dart';
 import 'package:flutter_app/demo/appstore/utils/date_utils.dart';
+import 'package:flutter_app/demo/appstore/utils/ui_utils.dart';
 import 'package:video_player/video_player.dart';
 import 'package:date_format/date_format.dart';
 
-Padding _buildPaddingTop8() {
-  return const Padding(padding: EdgeInsets.only(top: 8.0));
-}
+
 
 Widget _buildSmallTitle(String text, Color color) {
   return new Text(
@@ -35,78 +34,6 @@ Widget _buildDivider(double paddingLeft) {
     child: new Divider(
       color: Colors.grey[250],
       height: 1.0,
-    ),
-  );
-}
-
-Widget _buildAppIconOverload(String appIcon, double size, double radius) {
-  return new Container(
-    width: size,
-    height: size,
-    decoration: new BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('images/$appIcon'), fit: BoxFit.cover),
-        borderRadius: BorderRadius.all(Radius.circular(radius)),
-        border:
-            Border.all(color: CupertinoColors.lightBackgroundGray, width: 1.0)),
-  );
-}
-
-Widget _buildAppIcon(String appIcon, double size) {
-  return _buildAppIconOverload(appIcon, size, 16.0);
-}
-
-Widget _buildAppNameText(String appName) {
-  return new Text(
-    appName,
-    style: TextStyle(
-      fontSize: 16.0,
-      color: CupertinoColors.black,
-    ),
-  );
-}
-
-Widget _buildAppDescText(String appDesc) {
-  return new Text(
-    appDesc,
-    style: TextStyle(fontSize: 13.0, color: Colors.grey),
-  );
-}
-
-Widget _buildAppGetButtonBlue(String text) {
-  return _buildAppGetButton(text, Colors.white, Colors.blueAccent);
-}
-
-Widget _buildAppGetButtonGrey(String text) {
-  return _buildAppGetButton(
-      text, Colors.blueAccent, CupertinoColors.lightBackgroundGray);
-}
-
-Widget _buildAppGetButton(String text, Color textColor, Color btnColor) {
-  return CupertinoButton(
-    child: new Text(
-      text,
-      style: TextStyle(
-        color: textColor,
-        fontSize: 14.0,
-        fontWeight: FontWeight.w700,
-        letterSpacing: -0.28,
-      ),
-    ),
-    onPressed: () {},
-    color: btnColor,
-    padding: EdgeInsets.symmetric(horizontal: 24.0),
-    borderRadius: new BorderRadius.circular(32.0),
-    minSize: 32.0,
-  );
-}
-
-Widget _buildAppGetHintText() {
-  return new Text(
-    'App内购买项目',
-    style: TextStyle(
-      color: Colors.grey,
-      fontSize: 10.0,
     ),
   );
 }
@@ -253,7 +180,7 @@ class AppStoreTodayDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 _buildSmallTitle(smallTitle, Colors.white),
-                _buildPaddingTop8(),
+                buildPaddingTop8(),
                 _buildNormalTitle(normalTitle, Colors.white)
               ],
             ),
@@ -271,21 +198,21 @@ class AppStoreTodayDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          _buildAppIcon(model.appInfo.appIcon, 80.0),
-          _buildPaddingTop8(),
+          buildAppIcon(model.appInfo.appIcon, 80.0),
+          buildPaddingTop8(),
           new Text(
             model.appInfo.appName,
             style: new TextStyle(color: Colors.blueAccent, fontSize: 20.0),
           ),
-          _buildPaddingTop8(),
+          buildPaddingTop8(),
           new Text(
             model.appInfo.appDesc,
             style: new TextStyle(color: Colors.grey, fontSize: 14.0),
           ),
-          _buildPaddingTop8(),
-          _buildAppGetButtonBlue('获取'),
+          buildPaddingTop8(),
+          buildAppGetButtonBlue('获取'),
           new Padding(padding: EdgeInsets.only(top: 5.0)),
-          _buildAppGetHintText()
+          buildAppGetHintText()
         ],
       ),
     );
@@ -468,12 +395,12 @@ class AccountInfoPage extends StatelessWidget {
   }
 }
 
-class AppToday extends StatefulWidget {
+class AppStoreToday extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new AppTodayState();
+  State<StatefulWidget> createState() => new AppStoreTodayState();
 }
 
-class AppTodayState extends State<AppToday> {
+class AppStoreTodayState extends State<AppStoreToday> {
   BuildContext _context;
   AppInfo app1 = new AppInfo('ic_wechat.png', '微信', '社交');
   AppInfo app2 = new AppInfo('ic_momo.png', 'MOMO陌陌', '很高兴认识你');
@@ -709,9 +636,9 @@ class AppTodayState extends State<AppToday> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   _buildSmallTitle(item.subTitle, Colors.grey),
-                  _buildPaddingTop8(),
+                  buildPaddingTop8(),
                   _buildNormalTitle(item.title, Colors.black),
-                  _buildPaddingTop8(),
+                  buildPaddingTop8(),
                   _buildSmallTitle(item.subTitle2, Colors.grey),
                 ],
               ),
@@ -738,7 +665,7 @@ class AppTodayState extends State<AppToday> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               _buildSmallTitle(item.subTitle, item.subTitleColor),
-              _buildPaddingTop8(),
+              buildPaddingTop8(),
               _buildNormalTitle(item.title, item.titleColor)
             ],
           ),
@@ -761,7 +688,7 @@ class AppTodayState extends State<AppToday> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               _buildSmallTitle(item.subTitle, item.subTitleColor),
-              _buildPaddingTop8(),
+              buildPaddingTop8(),
               _buildNormalTitle(item.title, item.titleColor),
               Expanded(
                   child: new Center(
@@ -817,35 +744,25 @@ class AppTodayState extends State<AppToday> {
         padding: EdgeInsets.symmetric(vertical: 8.0),
         child: new Row(
           children: <Widget>[
-            new Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: new BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('images/$appIconName'),
-                      fit: BoxFit.cover),
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                  border: Border.all(
-                      color: CupertinoColors.lightBackgroundGray, width: 1.0)),
-            ),
+            buildAppIcon(appIconName, 60.0),
             Expanded(
               child: new Container(
                 margin: EdgeInsets.only(left: 8.0),
                 child: new Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    _buildAppNameText(appName),
+                    buildAppNameText(appName),
                     const Padding(padding: EdgeInsets.only(top: 5.0)),
-                    _buildAppDescText(appDesc)
+                    buildAppDescText(appDesc)
                   ],
                 ),
               ),
             ),
             new Column(
               children: <Widget>[
-                _buildAppGetButtonGrey('获取'),
+                buildAppGetButtonGrey('获取'),
                 new Padding(padding: EdgeInsets.only(top: 5.0)),
-                _buildAppGetHintText()
+                buildAppGetHintText()
               ],
             )
           ],
@@ -869,7 +786,7 @@ class AppTodayState extends State<AppToday> {
                 _buildNormalTitle(item.title, item.titleColor),
                 new Expanded(
                   child: new Center(
-                    child: _buildAppIconOverload(
+                    child: buildAppIconOverload(
                         item.apps[0].appIcon, 180.0, 52.0),
                   ),
                 ),
@@ -879,16 +796,16 @@ class AppTodayState extends State<AppToday> {
                     new Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        _buildAppNameText(item.apps[0].appName),
+                        buildAppNameText(item.apps[0].appName),
                         new Padding(padding: EdgeInsets.only(top: 5.0)),
-                        _buildAppDescText(item.apps[0].appDesc),
+                        buildAppDescText(item.apps[0].appDesc),
                       ],
                     ),
                     new Column(
                       children: <Widget>[
-                        _buildAppGetButtonGrey('￥6.00'),
+                        buildAppGetButtonGrey('￥6.00'),
                         new Padding(padding: EdgeInsets.only(top: 5.0)),
-                        _buildAppGetHintText()
+                        buildAppGetHintText()
                       ],
                     )
                   ],
@@ -906,10 +823,10 @@ class AppTodayState extends State<AppToday> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           _buildFootButton(item.subTitleColor, item.subTitle),
-          _buildPaddingTop8(),
+          buildPaddingTop8(),
           _buildFootButton(item.subTitleColor, item.subTitle2),
-          _buildPaddingTop8(),
-          _buildPaddingTop8(),
+          buildPaddingTop8(),
+          buildPaddingTop8(),
           new Divider(
             height: 1.0,
             color: Colors.grey[300],
@@ -1032,11 +949,3 @@ class AppTodayItem {
 }
 
 enum ViewType { type_0, type_1, type_2, type_3, type_4, type_5, type_6, type_7 }
-
-class AppInfo {
-  String appIcon;
-  String appName;
-  String appDesc;
-
-  AppInfo(this.appIcon, this.appName, this.appDesc);
-}

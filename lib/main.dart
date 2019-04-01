@@ -11,6 +11,7 @@ void main() {
 //        primaryColorLight: Style.statusBarColor,
 //        primaryColorBrightness: Brightness.dark,
 //        primarySwatch: Colors.grey
+//        scaffoldBackgroundColor: Colors.grey[50]
     ),
     debugShowCheckedModeBanner: false,
     title: 'Fluter',

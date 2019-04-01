@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app/demo/appstore/app_store_demo.dart';
 import 'package:flutter_app/demo/appstore/app_store_search.dart';
 import 'package:flutter_app/demo/appstore/app_store_today.dart';
+import 'package:flutter_app/demo/appstore/app_store_update.dart';
 import 'package:flutter_app/demo/list_demo.dart';
 import 'package:flutter_app/demo/list_load_demo.dart';
 
@@ -55,13 +56,13 @@ class AppStoreMain extends StatelessWidget {
               builder: (BuildContext context) {
                 switch (index) {
                   case 0:
-                    return new AppToday();
+                    return new AppStoreToday();
                     break;
                   case 1:
                     return new AppStoreDemo();
                     break;
                   case 2:
-                    return new ListLoad();
+                    return new AppStoreUpdate();
                     break;
                   case 3:
                     return new AppStoreSearch();
