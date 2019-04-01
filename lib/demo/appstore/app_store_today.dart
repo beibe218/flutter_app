@@ -291,13 +291,13 @@ class AppStoreTodayDetails extends StatelessWidget {
     );
   }
 
-  Widget _buildShareRow(){
+  Widget _buildShareRow() {
     return new Center(
       child: new Container(
         margin: EdgeInsets.only(top: 50.0, bottom: 30.0),
         width: 120.0,
         child: new CupertinoButton(
-          child:new Row(
+          child: new Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Icon(
@@ -307,7 +307,8 @@ class AppStoreTodayDetails extends StatelessWidget {
               const Padding(padding: EdgeInsets.only(left: 5.0)),
               const Text(
                 '分享',
-                style: const TextStyle(color: Colors.blueAccent, fontSize: 16.0),
+                style:
+                    const TextStyle(color: Colors.blueAccent, fontSize: 16.0),
               )
             ],
           ),
@@ -486,17 +487,52 @@ class AppTodayState extends State<AppToday> {
   var lastItem = new AppTodayItem(ViewType.type_7, '', '兑换', Colors.blueAccent,
       '为 Apple ID 充值', '', Colors.blueAccent, []);
 
+  int morePage = 3;
   int loadMoreCount = 0;
   bool isAddLastItem = false;
 
   List<AppTodayItem> todayItems;
   List<AppTodayItem> todayItemsMoreData;
 
+  final _scrollController = ScrollController();
+
+  loadMore() async {
+    if (loadMoreCount <= morePage && !isAddLastItem) {
+      // 延迟处理任务
+      await Future.delayed(Duration(milliseconds: 2000), () {
+        setState(() {
+          todayItems.addAll(todayItemsMoreData);
+          loadMoreCount++;
+
+          //最后一页，添加脚布局
+          if (loadMoreCount == morePage) {
+            isAddLastItem = true;
+            setState(() {
+              todayItems.add(lastItem);
+            });
+          }
+        });
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    // 监听现在的位置是否下滑到了底部
+    _scrollController.addListener(() {
+      if (_scrollController.offset ==
+          _scrollController.position.maxScrollExtent) {
+        // 加载更多数据
+        loadMore();
+      }
+    });
+
     List<AppInfo> appInfo1 = <AppInfo>[app1, app2, app3, app4, app5];
     List<AppInfo> appInfo2 = <AppInfo>[app5, app6, app7, app8, app3];
+
+    var titleItem = new AppTodayItem(
+        ViewType.type_0, '', '', Colors.black, '', '', Colors.black, []);
 
     var item1 = new AppTodayItem(ViewType.type_1, 'pic_chiji_1.jpg', '精选游戏',
         Colors.grey, '徒步生存之旅', '绝地求生大逃杀', Colors.white, [app1]);
@@ -520,6 +556,7 @@ class AppTodayState extends State<AppToday> {
         Colors.grey, '', '荒原上的昼与夜', Colors.black, [app2]);
 
     todayItems = <AppTodayItem>[
+      titleItem,
       item1,
       item2,
       item3,
@@ -929,35 +966,21 @@ class AppTodayState extends State<AppToday> {
         ),
       ),
       body: new ListView.builder(
+        controller: _scrollController,
         itemBuilder: (BuildContext context, int index) {
-          print("listIndex=$index");
-
-          if (loadMoreCount == 2 && !isAddLastItem) {
-            isAddLastItem = true;
-            Future.delayed(Duration(milliseconds: 200)).then((e) {
-              setState(() {
-                todayItems.add(lastItem);
-              });
-            });
+          if (index == todayItems.length) {
+            return new Padding(
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: new CupertinoActivityIndicator(),
+            );
           }
 
-          if (loadMoreCount < 3 &&
-              !isAddLastItem &&
-              index >= todayItems.length - 1) {
-            loadMoreCount++;
-            Future.delayed(Duration(milliseconds: 200)).then((e) {
-              setState(() {
-                todayItems.addAll(todayItemsMoreData);
-              });
-            });
-          }
+          AppTodayItem item = todayItems[index];
+          Widget itemView;
 
-          if (index == 0) {
+          if (item.viewType == ViewType.type_0) {
             return _buildTitle();
           }
-
-          AppTodayItem item = todayItems[index - 1];
-          Widget itemView;
 
           if (item.viewType == ViewType.type_7) {
             return _buildFootRow(item);
@@ -988,7 +1011,7 @@ class AppTodayState extends State<AppToday> {
             ),
           );
         },
-        itemCount: todayItems.length + 1,
+        itemCount: isAddLastItem ? todayItems.length : todayItems.length + 1,
       ),
     );
   }
@@ -1008,7 +1031,7 @@ class AppTodayItem {
       this.subTitle2, this.title, this.titleColor, this.apps);
 }
 
-enum ViewType { type_1, type_2, type_3, type_4, type_5, type_6, type_7 }
+enum ViewType { type_0, type_1, type_2, type_3, type_4, type_5, type_6, type_7 }
 
 class AppInfo {
   String appIcon;

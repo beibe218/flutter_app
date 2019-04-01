@@ -9,6 +9,7 @@ import 'package:flutter_app/demo/appstore/app_store_demo.dart';
 import 'package:flutter_app/demo/appstore/app_store_search.dart';
 import 'package:flutter_app/demo/appstore/app_store_today.dart';
 import 'package:flutter_app/demo/list_demo.dart';
+import 'package:flutter_app/demo/list_load_demo.dart';
 
 int lastIndex = 0;
 
@@ -60,7 +61,7 @@ class AppStoreMain extends StatelessWidget {
                     return new AppStoreDemo();
                     break;
                   case 2:
-//                    return new ListDemo();
+                    return new ListLoad();
                     break;
                   case 3:
                     return new AppStoreSearch();
