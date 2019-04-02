@@ -110,16 +110,53 @@ class AppStoreGames extends StatefulWidget {
 
 class AppStoreGamesState extends State<AppStoreGames> {
   AppGamesAppInfo game1 = new AppGamesAppInfo(
-      'ic_wechat.png', '微信', '社交', '新游戏', '选择善恶之路 成为强大神明', 'picture_1.png');
+      'ic_game_1.png', '风之大陆', '紫龙游戏', '重磅更新', '开放“闪卡”升级系统', 'pictures_game1_09.jpg');
 
-  AppGamesAppInfo game2 = new AppGamesAppInfo('ic_momo.png', 'MOMO陌陌', '很高兴认识你',
-      '预定开启', '“游戏禅师”陈星汉新作', 'picture_zhifouzhifou.png');
+  AppGamesAppInfo game2 = new AppGamesAppInfo('ic_game_2.png', '航海王：燃烧意志', '航海王正版3D角色扮演手游',
+      '预定开启', '“你想成为航海王吗？', 'pictures_game2_01.jpg');
 
   AppGamesAppInfo game3 = new AppGamesAppInfo(
-      'ic_youku.png', '优酷视频', '知否知否正在热播', '重磅更新', '四周年庆典开启', 'lake.jpg');
+      'ic_game_3.png', '绝地求生', '春日特训版本', '重磅更新', '四周年庆典开启', 'pictures_game3_01.jpg');
 
   AppGamesAppInfo game4 = new AppGamesAppInfo(
-      'ic_douyin.png', '抖音', '记录美好生活', '重磅更新', '新增限时活动：天选之人', 'picture_2.png');
+      'ic_game_4.png', '狂野飙车8：急速凌云', '在线急速街机赛车游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game4_01.jpg');
+
+  AppGamesAppInfo game5 = new AppGamesAppInfo(
+      'ic_game_5.png', '极品飞车17', '破2亿下载量你还不玩？', '重磅更新', '新增限时活动：天选之人', 'pictures_game5_01.jpg');
+
+  AppGamesAppInfo game6 = new AppGamesAppInfo(
+      'ic_game_6.png', '真实赛车3', 'EA出品，必属精品。', '重磅更新', '新增限时活动：天选之人', 'pictures_game6_01.jpg');
+
+  AppGamesAppInfo game7 = new AppGamesAppInfo(
+      'ic_game_7.png', 'QQ飞车', '腾讯唯一官方正版《QQ飞车手游》', '重磅更新', '新增限时活动：天选之人', 'pictures_game7_01.jpg');
+
+  AppGamesAppInfo game8 = new AppGamesAppInfo(
+      'ic_game_8.png', '王者荣耀', '在线急速街机赛车游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game8_01.jpg');
+
+  AppGamesAppInfo game9 = new AppGamesAppInfo(
+      'ic_game_9.png', '天天酷跑', '在线急速街机赛车游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game1_08.jpg');
+
+  AppGamesAppInfo game10 = new AppGamesAppInfo(
+      'ic_game_10.png', '我的世界', '中国顶尖UGC游戏平台', '重磅更新', '新增限时活动：天选之人', 'pic_today_2.jpg');
+
+  AppGamesAppInfo game11 = new AppGamesAppInfo(
+      'ic_game_11.png', '保卫萝卜', '制作精美、真正可爱范儿的超萌塔防游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game11_01.jpg');
+
+  AppGamesAppInfo game12 = new AppGamesAppInfo(
+      'ic_game_12.png', '穿越火线:枪战王者', '三亿手机枪战梦想（最新版）', '重磅更新', '新增限时活动：天选之人', 'pictures_game1_07.jpg');
+
+  AppGamesAppInfo game13 = new AppGamesAppInfo(
+      'ic_game_13.png', '像素枪战', '沙盒风格的第一人称射击游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game13_01.jpg');
+
+  AppGamesAppInfo game14 = new AppGamesAppInfo(
+      'ic_game_14.png', '梦幻西游', '人气超高的网络游戏同名手游', '重磅更新', '新增限时活动：天选之人', 'pictures_game14_01.jpg');
+
+  AppGamesAppInfo game15 = new AppGamesAppInfo(
+      'ic_game_15.png', '我叫MT2-新宠来袭', '策略游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game1_06.jpg');
+
+  AppGamesAppInfo game16 = new AppGamesAppInfo(
+      'ic_game_16.png', '海之号角', '冒险游戏，新版本更新，还不赶快下载！', '重磅更新', '新增限时活动：天选之人', 'pictures_game16_01.jpg');
+
 
   AppGamesAppInfo link1 = new AppGamesAppInfo('', '绑定支付宝、微信支付或银行卡', '', '', '', '');
   AppGamesAppInfo link2 = new AppGamesAppInfo('', 'App Store 家长指南', '', '', '', '');
@@ -141,58 +178,65 @@ class AppStoreGamesState extends State<AppStoreGames> {
       game2,
       game3,
       game4,
-      game1,
-      game2,
-      game3,
-      game4,
-      game1,
-      game1,
+      game5,
+      game6,
+      game7,
+      game8,
+      game9,
+      game10,
     ]);
 
     AppGamesItem gameItems3 = new AppGamesItem(ViewType.type3, '最佳更新', [
+      game11,
+      game12,
+      game13,
+      game14,
+      game15,
+      game16,
       game1,
       game2,
       game3,
       game4,
-      game1,
-      game2,
-      game3,
-      game4,
-      game1,
-      game1,
     ]);
 
     AppGamesItem gameItems4 = new AppGamesItem(ViewType.type4, '更多你可能喜欢的游戏', [
-      game4,
-      game3,
-      game1,
-      game2,
-      game4,
       game1,
       game2,
       game3,
-      game1,
+      game4,
+      game5,
+      game6,
+      game7,
+      game8,
+      game9,
+      game10,
+      game11,
+      game12,
+      game13,
+      game14,
+      game15,
+      game16,
     ]);
 
     AppGamesItem gameItems5 = new AppGamesItem(ViewType.type5, '今天玩什么', [
-      game4,
-      game3,
-      game1,
-      game2,
-      game4,
-      game1,
-      game2,
-      game3,
-      game1,
+      game13,
+      game11,
+      game16,
+      game14,
+      game5,
+      game6,
+      game7,
+      game8,
+      game9,
     ]);
 
     AppGamesItem gameItems6 = new AppGamesItem(ViewType.type6, '热门分类', [
-      game4,
+      game1,
       game3,
-      game1,
-      game2,
-      game4,
-      game1,
+      game5,
+      game7,
+      game9,
+      game11,
     ]);
 
     AppGamesItem gameItems7 = new AppGamesItem(ViewType.type2, '免费游戏排行', [
@@ -200,25 +244,25 @@ class AppStoreGamesState extends State<AppStoreGames> {
       game2,
       game3,
       game4,
-      game1,
-      game2,
-      game3,
-      game4,
-      game1,
-      game1,
+      game5,
+      game6,
+      game10,
+      game12,
+      game14,
+      game16,
     ]);
 
     AppGamesItem gameItems8 = new AppGamesItem(ViewType.type3, '最佳更新', [
-      game1,
-      game2,
-      game3,
+      game9,
+      game8,
+      game7,
+      game6,
+      game5,
       game4,
-      game1,
-      game2,
       game3,
-      game4,
+      game2,
       game1,
-      game1,
+      game11,
     ]);
 
     AppGamesItem gameItems9 = new AppGamesItem(ViewType.type7, '快速连接', [
@@ -510,7 +554,7 @@ class AppHorizontalList3State extends State<AppHorizontalList3> {
         _buildAppItem(apps[0].appIcon, apps[0].appName, apps[0].appDesc);
 
     Widget app2Item = app2 != null
-        ? _buildAppItem(apps[0].appIcon, apps[0].appName, apps[0].appDesc)
+        ? _buildAppItem(app2.appIcon, app2.appName, app2.appDesc)
         : _buildAppItem('', '', '');
 
     return Container(

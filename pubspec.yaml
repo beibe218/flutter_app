@@ -51,6 +51,43 @@ flutter:
     - images/pic_today_3.png
     - images/pic_today_4.png
     - videos/butterfly.mp4
+    - images/pictures_game1_01.jpg
+    - images/pictures_game1_02.jpg
+    - images/pictures_game1_03.jpg
+    - images/pictures_game1_04.jpg
+    - images/pictures_game1_05.jpg
+    - images/pictures_game1_06.jpg
+    - images/pictures_game1_07.jpg
+    - images/pictures_game1_08.jpg
+    - images/pictures_game1_09.jpg
+    - images/pictures_game1_10.jpg
+    - images/pictures_game2_01.jpg
+    - images/pictures_game3_01.jpg
+    - images/pictures_game4_01.jpg
+    - images/pictures_game5_01.jpg
+    - images/pictures_game6_01.jpg
+    - images/pictures_game7_01.jpg
+    - images/pictures_game8_01.jpg
+    - images/pictures_game11_01.jpg
+    - images/pictures_game13_01.jpg
+    - images/pictures_game14_01.jpg
+    - images/pictures_game16_01.jpg
+    - images/ic_game_1.png
+    - images/ic_game_2.png
+    - images/ic_game_3.png
+    - images/ic_game_4.png
+    - images/ic_game_5.png
+    - images/ic_game_6.png
+    - images/ic_game_7.png
+    - images/ic_game_8.png
+    - images/ic_game_9.png
+    - images/ic_game_10.png
+    - images/ic_game_11.png
+    - images/ic_game_12.png
+    - images/ic_game_13.png
+    - images/ic_game_14.png
+    - images/ic_game_15.png
+    - images/ic_game_16.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
