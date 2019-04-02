@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/demo/appstore/app_store_demo.dart';
+import 'package:flutter_app/demo/appstore/app_store_games.dart';
 import 'package:flutter_app/demo/appstore/app_store_search.dart';
 import 'package:flutter_app/demo/appstore/app_store_today.dart';
 import 'package:flutter_app/demo/appstore/app_store_update.dart';
@@ -42,6 +43,9 @@ class AppStoreMain extends StatelessWidget {
               title: const Text('Today'),
             ),
             const BottomNavigationBarItem(
+                icon: const Icon(CupertinoIcons.folder),
+                title: const Text('游戏')),
+            const BottomNavigationBarItem(
                 icon: const Icon(CupertinoIcons.plus_circled),
                 title: const Text('App')),
             const BottomNavigationBarItem(
@@ -59,12 +63,15 @@ class AppStoreMain extends StatelessWidget {
                     return new AppStoreToday();
                     break;
                   case 1:
-                    return new AppStoreDemo();
+                    return new AppStoreGames();
                     break;
                   case 2:
-                    return new AppStoreUpdate();
+                    return new AppStoreDemo();
                     break;
                   case 3:
+                    return new AppStoreUpdate();
+                    break;
+                  case 4:
                     return new AppStoreSearch();
                     break;
                 }

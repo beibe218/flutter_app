@@ -32,7 +32,7 @@ Widget buildAppIconOverload(String appIcon, double size, double radius) {
             image: AssetImage('images/$appIcon'), fit: BoxFit.cover),
         borderRadius: BorderRadius.all(Radius.circular(radius)),
         border:
-        Border.all(color: CupertinoColors.lightBackgroundGray, width: 1.0)),
+            Border.all(color: CupertinoColors.lightBackgroundGray, width: 1.0)),
   );
 }
 
@@ -93,4 +93,74 @@ Widget buildAppGetHintText() {
 
 Padding buildPaddingTop8() {
   return const Padding(padding: EdgeInsets.only(top: 8.0));
+}
+
+Widget buildPicture(String pictureName, double pictureWidth) {
+  return new Container(
+    width: pictureWidth,
+    decoration: BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage('images/$pictureName'),
+        fit: BoxFit.cover,
+      ),
+      borderRadius: BorderRadius.all(
+        Radius.circular(12.0),
+      ),
+    ),
+  );
+}
+
+Widget buildFootRow() {
+  return new Container(
+    margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+    child: new Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        _buildFootButton(Colors.blueAccent, '兑换'),
+        buildPaddingTop8(),
+        _buildFootButton(Colors.blueAccent, '为 Apple ID 充值'),
+        buildPaddingTop8(),
+        buildPaddingTop8(),
+        new Divider(
+          height: 1.0,
+          color: Colors.grey[300],
+        ),
+        new Container(
+          padding: EdgeInsets.symmetric(vertical: 14.0),
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                '条款与条件',
+                style: const TextStyle(color: Colors.grey, fontSize: 14.0),
+              ),
+              const Padding(padding: EdgeInsets.only(left: 5.0)),
+              const Icon(
+                CupertinoIcons.right_chevron,
+                color: Colors.grey,
+                size: 18,
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+Widget _buildFootButton(Color color, String text) {
+  return new Container(
+    width: 9999.0,
+    child: new CupertinoButton(
+      child: new Text(
+        text,
+        style: new TextStyle(
+            color: color, fontSize: 16.0, fontWeight: FontWeight.w700),
+      ),
+      onPressed: () {},
+      color: Colors.blueGrey[50],
+      padding: EdgeInsets.symmetric(vertical: 12.0),
+    ),
+  );
 }

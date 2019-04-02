@@ -12,8 +12,6 @@ import 'package:flutter_app/demo/appstore/utils/ui_utils.dart';
 import 'package:video_player/video_player.dart';
 import 'package:date_format/date_format.dart';
 
-
-
 Widget _buildSmallTitle(String text, Color color) {
   return new Text(
     text,
@@ -417,6 +415,7 @@ class AppStoreTodayState extends State<AppStoreToday> {
   int morePage = 3;
   int loadMoreCount = 0;
   bool isAddLastItem = false;
+  bool loadingMore = false;
 
   List<AppTodayItem> todayItems;
   List<AppTodayItem> todayItemsMoreData;
@@ -424,6 +423,9 @@ class AppStoreTodayState extends State<AppStoreToday> {
   final _scrollController = ScrollController();
 
   loadMore() async {
+    setState(() {
+      loadingMore = true;
+    });
     if (loadMoreCount <= morePage && !isAddLastItem) {
       // 延迟处理任务
       await Future.delayed(Duration(milliseconds: 2000), () {
@@ -438,6 +440,8 @@ class AppStoreTodayState extends State<AppStoreToday> {
               todayItems.add(lastItem);
             });
           }
+
+          loadingMore = false;
         });
       });
     }
@@ -449,7 +453,8 @@ class AppStoreTodayState extends State<AppStoreToday> {
     // 监听现在的位置是否下滑到了底部
     _scrollController.addListener(() {
       if (_scrollController.offset ==
-          _scrollController.position.maxScrollExtent) {
+              _scrollController.position.maxScrollExtent &&
+          !loadingMore) {
         // 加载更多数据
         loadMore();
       }
@@ -786,8 +791,8 @@ class AppStoreTodayState extends State<AppStoreToday> {
                 _buildNormalTitle(item.title, item.titleColor),
                 new Expanded(
                   child: new Center(
-                    child: buildAppIconOverload(
-                        item.apps[0].appIcon, 180.0, 52.0),
+                    child:
+                        buildAppIconOverload(item.apps[0].appIcon, 180.0, 52.0),
                   ),
                 ),
                 new Row(
@@ -814,61 +819,6 @@ class AppStoreTodayState extends State<AppStoreToday> {
             ),
           ),
         ));
-  }
-
-  Widget _buildFootRow(AppTodayItem item) {
-    return new Container(
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          _buildFootButton(item.subTitleColor, item.subTitle),
-          buildPaddingTop8(),
-          _buildFootButton(item.subTitleColor, item.subTitle2),
-          buildPaddingTop8(),
-          buildPaddingTop8(),
-          new Divider(
-            height: 1.0,
-            color: Colors.grey[300],
-          ),
-          new Container(
-            padding: EdgeInsets.symmetric(vertical: 14.0),
-            child: new Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  '条款与条件',
-                  style: const TextStyle(color: Colors.grey, fontSize: 14.0),
-                ),
-                const Padding(padding: EdgeInsets.only(left: 5.0)),
-                const Icon(
-                  CupertinoIcons.right_chevron,
-                  color: Colors.grey,
-                  size: 18,
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFootButton(Color color, String text) {
-    return new Container(
-      width: 9999.0,
-      child: new CupertinoButton(
-        child: new Text(
-          text,
-          style: new TextStyle(
-              color: color, fontSize: 16.0, fontWeight: FontWeight.w700),
-        ),
-        onPressed: () {},
-        color: Colors.blueGrey[50],
-        padding: EdgeInsets.symmetric(vertical: 12.0),
-      ),
-    );
   }
 
   @override
@@ -900,7 +850,7 @@ class AppStoreTodayState extends State<AppStoreToday> {
           }
 
           if (item.viewType == ViewType.type_7) {
-            return _buildFootRow(item);
+            return buildFootRow();
           }
 
           if (item.viewType == ViewType.type_1) {
