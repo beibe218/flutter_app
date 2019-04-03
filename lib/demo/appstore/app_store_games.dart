@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/demo/appstore/app_detail_demo.dart';
+import 'package:flutter_app/demo/appstore/app_model.dart';
 import 'package:flutter_app/demo/appstore/utils/ui_utils.dart';
 
-const double horListWidth = 400.0;
+const double horListWidth = 350.0;
+BuildContext _context;
+
+void _toAppDetail(AppGamesAppInfo app) {
+  var model = new AppModel(app.appIcon, app.appName, app.appDesc);
+  Navigator.push(
+      _context,
+      CupertinoPageRoute(
+          builder: (context) => new AppDetailDemo(
+                appModel: model,
+              )));
+}
 
 Widget _buildTitleView(String title) {
   return _buildTitleViewOverload(title, true);
@@ -58,7 +71,11 @@ Widget _buildAppItemDivider(double marginLeft) {
 Widget _buildAppItem(String appIcon, String appName, String appDesc) {
   return new GestureDetector(
     behavior: HitTestBehavior.opaque,
-    onTap: () {},
+    onTap: () {
+      if(appIcon.isNotEmpty){
+        _toAppDetail(new AppGamesAppInfo(appIcon, appName, appDesc, '', '', ''));
+      }
+    },
     child: new Container(
       width: horListWidth,
       child: new Row(
@@ -109,61 +126,65 @@ class AppStoreGames extends StatefulWidget {
 }
 
 class AppStoreGamesState extends State<AppStoreGames> {
-  AppGamesAppInfo game1 = new AppGamesAppInfo(
-      'ic_game_1.png', '风之大陆', '紫龙游戏', '重磅更新', '开放“闪卡”升级系统', 'pictures_game1_09.jpg');
+  AppGamesAppInfo game1 = new AppGamesAppInfo('ic_game_1.png', '风之大陆', '紫龙游戏',
+      '重磅更新', '开放“闪卡”升级系统', 'pictures_game1_09.jpg');
 
-  AppGamesAppInfo game2 = new AppGamesAppInfo('ic_game_2.png', '航海王：燃烧意志', '航海王正版3D角色扮演手游',
-      '预定开启', '“你想成为航海王吗？', 'pictures_game2_01.jpg');
+  AppGamesAppInfo game2 = new AppGamesAppInfo('ic_game_2.png', '航海王：燃烧意志',
+      '航海王正版3D角色扮演手游', '预定开启', '“你想成为航海王吗？', 'pictures_game2_01.jpg');
 
-  AppGamesAppInfo game3 = new AppGamesAppInfo(
-      'ic_game_3.png', '绝地求生', '春日特训版本', '重磅更新', '四周年庆典开启', 'pictures_game3_01.jpg');
+  AppGamesAppInfo game3 = new AppGamesAppInfo('ic_game_3.png', '绝地求生', '春日特训版本',
+      '重磅更新', '四周年庆典开启', 'pictures_game3_01.jpg');
 
-  AppGamesAppInfo game4 = new AppGamesAppInfo(
-      'ic_game_4.png', '狂野飙车8：急速凌云', '在线急速街机赛车游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game4_01.jpg');
+  AppGamesAppInfo game4 = new AppGamesAppInfo('ic_game_4.png', '狂野飙车8：急速凌云',
+      '在线急速街机赛车游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game4_01.jpg');
 
-  AppGamesAppInfo game5 = new AppGamesAppInfo(
-      'ic_game_5.png', '极品飞车17', '破2亿下载量你还不玩？', '重磅更新', '新增限时活动：天选之人', 'pictures_game5_01.jpg');
+  AppGamesAppInfo game5 = new AppGamesAppInfo('ic_game_5.png', '极品飞车17',
+      '破2亿下载量你还不玩？', '重磅更新', '新增限时活动：天选之人', 'pictures_game5_01.jpg');
 
-  AppGamesAppInfo game6 = new AppGamesAppInfo(
-      'ic_game_6.png', '真实赛车3', 'EA出品，必属精品。', '重磅更新', '新增限时活动：天选之人', 'pictures_game6_01.jpg');
+  AppGamesAppInfo game6 = new AppGamesAppInfo('ic_game_6.png', '真实赛车3',
+      'EA出品，必属精品。', '重磅更新', '新增限时活动：天选之人', 'pictures_game6_01.jpg');
 
-  AppGamesAppInfo game7 = new AppGamesAppInfo(
-      'ic_game_7.png', 'QQ飞车', '腾讯唯一官方正版《QQ飞车手游》', '重磅更新', '新增限时活动：天选之人', 'pictures_game7_01.jpg');
+  AppGamesAppInfo game7 = new AppGamesAppInfo('ic_game_7.png', 'QQ飞车',
+      '腾讯唯一官方正版《QQ飞车手游》', '重磅更新', '新增限时活动：天选之人', 'pictures_game7_01.jpg');
 
-  AppGamesAppInfo game8 = new AppGamesAppInfo(
-      'ic_game_8.png', '王者荣耀', '在线急速街机赛车游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game8_01.jpg');
+  AppGamesAppInfo game8 = new AppGamesAppInfo('ic_game_8.png', '王者荣耀',
+      '在线急速街机赛车游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game8_01.jpg');
 
-  AppGamesAppInfo game9 = new AppGamesAppInfo(
-      'ic_game_9.png', '天天酷跑', '在线急速街机赛车游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game1_08.jpg');
+  AppGamesAppInfo game9 = new AppGamesAppInfo('ic_game_9.png', '天天酷跑',
+      '在线急速街机赛车游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game1_08.jpg');
 
-  AppGamesAppInfo game10 = new AppGamesAppInfo(
-      'ic_game_10.png', '我的世界', '中国顶尖UGC游戏平台', '重磅更新', '新增限时活动：天选之人', 'pic_today_2.jpg');
+  AppGamesAppInfo game10 = new AppGamesAppInfo('ic_game_10.png', '我的世界',
+      '中国顶尖UGC游戏平台', '重磅更新', '新增限时活动：天选之人', 'pic_today_2.jpg');
 
-  AppGamesAppInfo game11 = new AppGamesAppInfo(
-      'ic_game_11.png', '保卫萝卜', '制作精美、真正可爱范儿的超萌塔防游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game11_01.jpg');
+  AppGamesAppInfo game11 = new AppGamesAppInfo('ic_game_11.png', '保卫萝卜',
+      '制作精美、真正可爱范儿的超萌塔防游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game11_01.jpg');
 
-  AppGamesAppInfo game12 = new AppGamesAppInfo(
-      'ic_game_12.png', '穿越火线:枪战王者', '三亿手机枪战梦想（最新版）', '重磅更新', '新增限时活动：天选之人', 'pictures_game1_07.jpg');
+  AppGamesAppInfo game12 = new AppGamesAppInfo('ic_game_12.png', '穿越火线:枪战王者',
+      '三亿手机枪战梦想（最新版）', '重磅更新', '新增限时活动：天选之人', 'pictures_game1_07.jpg');
 
-  AppGamesAppInfo game13 = new AppGamesAppInfo(
-      'ic_game_13.png', '像素枪战', '沙盒风格的第一人称射击游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game13_01.jpg');
+  AppGamesAppInfo game13 = new AppGamesAppInfo('ic_game_13.png', '像素枪战',
+      '沙盒风格的第一人称射击游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game13_01.jpg');
 
-  AppGamesAppInfo game14 = new AppGamesAppInfo(
-      'ic_game_14.png', '梦幻西游', '人气超高的网络游戏同名手游', '重磅更新', '新增限时活动：天选之人', 'pictures_game14_01.jpg');
+  AppGamesAppInfo game14 = new AppGamesAppInfo('ic_game_14.png', '梦幻西游',
+      '人气超高的网络游戏同名手游', '重磅更新', '新增限时活动：天选之人', 'pictures_game14_01.jpg');
 
-  AppGamesAppInfo game15 = new AppGamesAppInfo(
-      'ic_game_15.png', '我叫MT2-新宠来袭', '策略游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game1_06.jpg');
+  AppGamesAppInfo game15 = new AppGamesAppInfo('ic_game_15.png', '我叫MT2-新宠来袭',
+      '策略游戏', '重磅更新', '新增限时活动：天选之人', 'pictures_game1_06.jpg');
 
-  AppGamesAppInfo game16 = new AppGamesAppInfo(
-      'ic_game_16.png', '海之号角', '冒险游戏，新版本更新，还不赶快下载！', '重磅更新', '新增限时活动：天选之人', 'pictures_game16_01.jpg');
+  AppGamesAppInfo game16 = new AppGamesAppInfo('ic_game_16.png', '海之号角', '冒险游戏',
+      '重磅更新', '新版本更新，还不赶快下载！', 'pictures_game16_01.jpg');
 
-
-  AppGamesAppInfo link1 = new AppGamesAppInfo('', '绑定支付宝、微信支付或银行卡', '', '', '', '');
-  AppGamesAppInfo link2 = new AppGamesAppInfo('', 'App Store 家长指南', '', '', '', '');
-  AppGamesAppInfo link3 = new AppGamesAppInfo('', '进一步了解 App 内购买项目', '', '', '', '');
-  AppGamesAppInfo link4 = new AppGamesAppInfo('', '儿童类 App 和游戏', '', '', '', '');
+  AppGamesAppInfo link1 =
+      new AppGamesAppInfo('', '绑定支付宝、微信支付或银行卡', '', '', '', '');
+  AppGamesAppInfo link2 =
+      new AppGamesAppInfo('', 'App Store 家长指南', '', '', '', '');
+  AppGamesAppInfo link3 =
+      new AppGamesAppInfo('', '进一步了解 App 内购买项目', '', '', '', '');
+  AppGamesAppInfo link4 =
+      new AppGamesAppInfo('', '儿童类 App 和游戏', '', '', '', '');
   AppGamesAppInfo link5 = new AppGamesAppInfo('', '关于个性化', '', '', '', '');
-  AppGamesAppInfo link6 = new AppGamesAppInfo('', '轻松上手 App Store', '', '', '', '');
+  AppGamesAppInfo link6 =
+      new AppGamesAppInfo('', '轻松上手 App Store', '', '', '', '');
 
   List<AppGamesItem> items;
 
@@ -292,6 +313,7 @@ class AppStoreGamesState extends State<AppStoreGames> {
 
   @override
   Widget build(BuildContext context) {
+    _context = context;
     return new Scaffold(
       appBar: CupertinoNavigationBar(
         middle: const Text('游戏'),
@@ -416,11 +438,19 @@ class AppHorizontalList1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new SizedBox(
-      height: 350.0,
+      height: 300.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
-          return _buildItem(apps[index], index == apps.length - 1);
+          AppGamesAppInfo app = apps[index];
+          Widget item = _buildItem(app, index == apps.length - 1);
+          return new GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              _toAppDetail(app);
+            },
+            child: item,
+          );
         },
         itemCount: apps.length,
       ),
@@ -580,7 +610,10 @@ class AppHorizontalList3State extends State<AppHorizontalList3> {
   Widget _buildAppItem(String appIcon, String appName, String appDesc) {
     return new GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () {},
+      onTap: () {
+        _toAppDetail(
+            new AppGamesAppInfo(appIcon, appName, appDesc, '', '', ''));
+      },
       child: Container(
         height: 80.0,
         width: horListWidth,
@@ -649,19 +682,25 @@ class AppHorizontalList4 extends StatefulWidget {
 
 class AppHorizontalList4State extends State<AppHorizontalList4> {
   Widget _buildItem(AppGamesAppInfo app, bool lastItem) {
-    return Container(
-      margin: lastItem
-          ? EdgeInsets.symmetric(horizontal: 16.0)
-          : EdgeInsets.only(left: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(child: buildAppIconOverload(app.appIcon, 180.0, 52.0)),
-          buildPaddingTop8(),
-          buildAppNameText(app.appName),
-          const Padding(padding: EdgeInsets.only(top: 5.0)),
-          buildAppDescText(app.appDesc),
-        ],
+    return new GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        _toAppDetail(app);
+      },
+      child: new Container(
+        margin: lastItem
+            ? EdgeInsets.symmetric(horizontal: 16.0)
+            : EdgeInsets.only(left: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(child: buildAppIconOverload(app.appIcon, 180.0, 52.0)),
+            buildPaddingTop8(),
+            buildAppNameText(app.appName),
+            const Padding(padding: EdgeInsets.only(top: 5.0)),
+            buildAppDescText(app.appDesc),
+          ],
+        ),
       ),
     );
   }
@@ -700,21 +739,27 @@ class AppHorizontalList5 extends StatefulWidget {
 
 class AppHorizontalList5State extends State<AppHorizontalList5> {
   Widget _buildItem(AppGamesAppInfo app, bool lastItem) {
-    return new Container(
-        width: horListWidth,
-        margin: lastItem
-            ? EdgeInsets.symmetric(horizontal: 16.0)
-            : EdgeInsets.only(left: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            buildAppDescText(app.subTitle2),
-            buildPaddingTop8(),
-            Expanded(child: buildPicture(app.appPicture, horListWidth)),
-            buildPaddingTop8(),
-            _buildAppItem(app.appIcon, app.appName, app.appDesc)
-          ],
-        ));
+    return new GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        _toAppDetail(app);
+      },
+      child: new Container(
+          width: horListWidth,
+          margin: lastItem
+              ? EdgeInsets.symmetric(horizontal: 16.0)
+              : EdgeInsets.only(left: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              buildAppDescText(app.subTitle2),
+              buildPaddingTop8(),
+              Expanded(child: buildPicture(app.appPicture, horListWidth)),
+              buildPaddingTop8(),
+              _buildAppItem(app.appIcon, app.appName, app.appDesc)
+            ],
+          )),
+    );
   }
 
   @override
@@ -723,7 +768,7 @@ class AppHorizontalList5State extends State<AppHorizontalList5> {
       children: <Widget>[
         _buildTitleView(widget.item.title),
         new SizedBox(
-          height: 360,
+          height: 320,
           child: new ListView.builder(
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
@@ -762,7 +807,13 @@ class AppHorizontalList6State extends State<AppHorizontalList6> {
     List<Widget> children = <Widget>[];
     for (int i = 0; i < apps.length; i++) {
       AppGamesAppInfo app = apps[i];
-      Widget row = _buildItem(app.appIcon, app.appName);
+      Widget row = new GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          _toAppDetail(app);
+        },
+        child: _buildItem(app.appIcon, app.appName),
+      );
       if (i == apps.length - 1) {
         children.add(row);
       } else {

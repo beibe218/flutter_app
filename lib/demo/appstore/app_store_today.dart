@@ -428,7 +428,7 @@ class AppStoreTodayState extends State<AppStoreToday> {
     });
     if (loadMoreCount <= morePage && !isAddLastItem) {
       // 延迟处理任务
-      await Future.delayed(Duration(milliseconds: 2000), () {
+      await Future.delayed(Duration(milliseconds: 500), () {
         setState(() {
           todayItems.addAll(todayItemsMoreData);
           loadMoreCount++;
