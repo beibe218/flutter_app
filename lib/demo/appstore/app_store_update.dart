@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/demo/appstore/app_detail_demo.dart';
 import 'package:flutter_app/demo/appstore/app_model.dart';
+import 'package:flutter_app/demo/appstore/model/apps.dart';
 import 'package:flutter_app/demo/appstore/style.dart';
 import 'package:flutter_app/demo/appstore/utils/ui_utils.dart';
 
@@ -152,7 +153,7 @@ class AppUpdateItemState extends State<AppUpdateItem> {
                   child: const Text(
                     '更多',
                     style: const TextStyle(
-                        fontSize: 14.0, color: Colors.blueAccent),
+                        fontSize: 15.0, color: Colors.blueAccent),
                   ),
                 ),
                 color: backgroundColor,

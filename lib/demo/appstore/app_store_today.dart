@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app/demo/appstore/app_detail_demo.dart';
 import 'package:flutter_app/demo/appstore/app_model.dart';
 import 'package:flutter_app/demo/appstore/model/app_today_detail_model.dart';
+import 'package:flutter_app/demo/appstore/model/apps.dart';
 import 'package:flutter_app/demo/appstore/style.dart';
 import 'package:flutter_app/demo/appstore/utils/date_utils.dart';
 import 'package:flutter_app/demo/appstore/utils/ui_utils.dart';
@@ -400,14 +401,6 @@ class AppStoreToday extends StatefulWidget {
 
 class AppStoreTodayState extends State<AppStoreToday> {
   BuildContext _context;
-  AppInfo app1 = new AppInfo('ic_wechat.png', '微信', '社交');
-  AppInfo app2 = new AppInfo('ic_momo.png', 'MOMO陌陌', '很高兴认识你');
-  AppInfo app3 = new AppInfo('ic_youku.png', '优酷视频', '知否知否正在热播');
-  AppInfo app4 = new AppInfo('ic_douyin.png', '抖音', '记录美好生活');
-  AppInfo app5 = new AppInfo('ic_qq.png', 'QQ', '社交');
-  AppInfo app6 = new AppInfo('ic_kugou.png', '酷狗音乐', '酷狗音乐，因你而酷');
-  AppInfo app7 = new AppInfo('ic_wangyimusic.png', '网易云音乐', '音乐的力量');
-  AppInfo app8 = new AppInfo('ic_taobao.png', '淘宝', '随时随地，想淘就淘');
 
   var lastItem = new AppTodayItem(ViewType.type_7, '', '兑换', Colors.blueAccent,
       '为 Apple ID 充值', '', Colors.blueAccent, []);
@@ -567,7 +560,7 @@ class AppStoreTodayState extends State<AppStoreToday> {
 
   void showAccountInfoPage() {
     Navigator.of(_context, rootNavigator: true)
-        .push(MaterialPageRoute(builder: (context) => new AccountInfoPage()));
+        .push(CupertinoPageRoute(builder: (context) => new AccountInfoPage()));
   }
 
   Widget _buildTitle() {

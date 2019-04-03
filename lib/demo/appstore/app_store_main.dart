@@ -10,13 +10,13 @@ import 'package:flutter_app/demo/appstore/app_store_games.dart';
 import 'package:flutter_app/demo/appstore/app_store_search.dart';
 import 'package:flutter_app/demo/appstore/app_store_today.dart';
 import 'package:flutter_app/demo/appstore/app_store_update.dart';
+import 'package:flutter_app/demo/appstore/model/apps.dart';
 import 'package:flutter_app/demo/list_demo.dart';
 import 'package:flutter_app/demo/list_load_demo.dart';
 
 int lastIndex = 0;
 
 class AppStoreMain extends StatelessWidget {
-
   static const routeName = '/app_store_main';
 
   @override
@@ -25,9 +25,9 @@ class AppStoreMain extends StatelessWidget {
 //        statusBarColor: const Color(0xCCF8F8F8),
 //        statusBarBrightness: Brightness.dark,
 //        statusBarIconBrightness: Brightness.dark));
-      //隐藏状态栏和导航栏
+    //隐藏状态栏和导航栏
 //    SystemChrome.setEnabledSystemUIOverlays([]);
-      //显示状态栏和导航栏
+    //显示状态栏和导航栏
 //    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
 //    if (Platform.isAndroid) {
 
@@ -63,10 +63,14 @@ class AppStoreMain extends StatelessWidget {
                     return new AppStoreToday();
                     break;
                   case 1:
-                    return new AppStoreGames();
+                    return new AppStoreGames(
+                      items: gameDatas,
+                    );
                     break;
                   case 2:
-                    return new AppStoreDemo();
+                    return new AppStoreApps(
+                      items: appDatas,
+                    );
                     break;
                   case 3:
                     return new AppStoreUpdate();

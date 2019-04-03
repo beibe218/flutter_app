@@ -1,4 +1,4 @@
-import 'package:flutter_app/demo/appstore/utils/ui_utils.dart';
+import 'package:flutter_app/demo/appstore/model/apps.dart';
 
 class AppTodayDetailModel{
   final String smallTitle;

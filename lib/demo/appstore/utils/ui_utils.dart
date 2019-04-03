@@ -1,24 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-AppInfo app1 = new AppInfo('ic_wechat.png', '微信', '社交');
-AppInfo app2 = new AppInfo('ic_momo.png', 'MOMO陌陌', '很高兴认识你');
-AppInfo app3 = new AppInfo('ic_youku.png', '优酷视频', '知否知否正在热播');
-AppInfo app4 = new AppInfo('ic_douyin.png', '抖音', '记录美好生活');
-AppInfo app5 = new AppInfo('ic_qq.png', 'QQ', '社交');
-AppInfo app6 = new AppInfo('ic_kugou.png', '酷狗音乐', '酷狗音乐，因你而酷');
-AppInfo app7 = new AppInfo('ic_wangyimusic.png', '网易云音乐', '音乐的力量');
-AppInfo app8 = new AppInfo('ic_taobao.png', '淘宝', '随时随地，想淘就淘');
-
-class AppInfo {
-  String appIcon;
-  String appName;
-  String appDesc;
-  bool clickMore = false;
-
-  AppInfo(this.appIcon, this.appName, this.appDesc);
-}
-
 Widget buildAppIcon(String appIcon, double size) {
   return buildAppIconOverload(appIcon, size, 16.0);
 }
